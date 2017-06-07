@@ -44,6 +44,7 @@ import android.os.Vibrator;
 import android.widget.Toast;
 
 //Kumail Naqvi June 5th 2017
+//test 1
 public class MainActivity extends AppCompatActivity {
     public static String currentCalculation;
     public static String previousCalculation;
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         Button bracketB = (Button) findViewById(R.id.bracketButton);
         Button logB = (Button)findViewById(R.id.logButton);
         Button lnB = (Button)findViewById(R.id.lnButton);
+        Button binButton = (Button)findViewById(R.id.bbb);
         Button sqrtB = (Button)findViewById(R.id.sqrtButton);
         final EditText editT = (EditText)findViewById(R.id.editText1);
         final TextView pView = (TextView)findViewById(R.id.primeView);
@@ -884,6 +886,31 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation = result;
 
 
+            }
+        });
+
+        binButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newR = previousAns.replaceAll("\\s+","");;
+                try{
+                    Integer newR2 = Integer.parseInt(newR);
+                    calculationView.setText(Integer.toBinaryString(newR2));
+                }
+                catch (Exception e){}
+            }
+        });
+
+        binButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String newR = previousAns.replaceAll("\\s+","");
+                try{
+                    Integer newR2 = Integer.parseInt(newR);
+                    calculationView.setText(Integer.toHexString(newR2));
+                }
+                catch (Exception e){}
+                return true;
             }
         });
 
