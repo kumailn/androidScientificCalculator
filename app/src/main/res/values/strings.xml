@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ScientificCalculator</string>
+    <string name="app_name">NuCalculator</string>
+    <string name="title_activity_main22">Main22Activity</string>
 </resources>
