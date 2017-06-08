@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@android:color/holo_blue_light"
     android:layout_height="match_parent"
-    tools:context="com.example.kumail.scientificcalculator.MainActivity">
+    tools:context="com.kumailn.calculator.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -469,6 +469,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:backgroundTint="@color/colorAccent"
         android:text="="
         android:textSize="38sp"
         android:textStyle="bold"
@@ -602,32 +603,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="104dp" />
 
-    <Button
-        android:id="@+id/angleButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="88dp"
-        android:layout_height="48dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:text="R"
-        android:textColor="@android:color/holo_red_light"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="8dp" />
-
     <TextView
         android:id="@+id/primeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="68dp"
         android:text="true"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
         android:id="@+id/editText1"
@@ -656,6 +642,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/angleButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="70dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="56dp"
+        android:text="R"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
 

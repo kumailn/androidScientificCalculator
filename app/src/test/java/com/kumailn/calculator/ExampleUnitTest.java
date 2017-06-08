@@ -1,4 +1,4 @@
-package com.example.kumail.scientificcalculator;
+package com.example.kumail.calculator;
 
 import org.junit.Test;
 

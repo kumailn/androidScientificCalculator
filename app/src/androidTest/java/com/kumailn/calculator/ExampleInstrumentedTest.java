@@ -1,4 +1,4 @@
-package com.example.kumail.scientificcalculator;
+package com.example.kumail.calculator;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

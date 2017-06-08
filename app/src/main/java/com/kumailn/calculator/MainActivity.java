@@ -1,4 +1,4 @@
-package com.example.kumail.scientificcalculator;
+package com.kumailn.calculator;
 
 import android.app.AlertDialog;
 import android.content.ClipData;
@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -23,31 +22,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.mariuszgromada.math.mxparser.Expression;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import org.mariuszgromada.math.mxparser.*;
 
-import android.widget.EditText;
-import android.widget.TextView;
-import android.os.Vibrator;
-import android.widget.Toast;
+import com.kumailn.calculator.R;
+
+import org.mariuszgromada.math.mxparser.Expression;
 
 //Kumail Naqvi June 5th 2017
 //test 1
@@ -882,7 +860,7 @@ public class MainActivity extends AppCompatActivity {
                 if (result.endsWith(".0")){
                     result = result.substring(0, result.length() - 2);
                 }
-                if(result.length() > 12){
+                if(result.length() > 22){
                     result = result.substring(0,12);
                 }
 

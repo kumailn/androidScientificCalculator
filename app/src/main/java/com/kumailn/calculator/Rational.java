@@ -1,4 +1,4 @@
-package com.example.kumail.scientificcalculator;
+package com.kumailn.calculator;
 
 
 import org.mariuszgromada.math.mxparser.Expression;
