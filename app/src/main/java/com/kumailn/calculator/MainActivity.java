@@ -1,10 +1,12 @@
 package com.kumailn.calculator;
 
+import android.animation.Animator;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -18,14 +20,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kumailn.calculator.R;
-
 import org.mariuszgromada.math.mxparser.Expression;
+
+import io.codetail.animation.ViewAnimationUtils;
 
 //Kumail Naqvi June 5th 2017
 //test 1
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button zeroB = (Button)findViewById(R.id.zeroButton);
+        Button zeroB = (Button)findViewById(R.id.sinButton);
         Button oneB = (Button)findViewById(R.id.oneButton);
         Button twoB = (Button)findViewById(R.id.twoButton);
         Button threeB = (Button)findViewById(R.id.threeButton);
@@ -56,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
         Button sevenB = (Button)findViewById(R.id.sevenButton);
         Button eightB = (Button)findViewById(R.id.eightButton);
         Button nineB = (Button)findViewById(R.id.nineButton);
-        Button decimalB = (Button)findViewById(R.id.decimalButton);
+        Button decimalB = (Button)findViewById(R.id.sinButton);
         Button ansB = (Button)findViewById(R.id.ansButton);
-        Button multB = (Button)findViewById(R.id.multiplyButton);
-        Button minusB = (Button)findViewById(R.id.minusButton);
-        Button divB = (Button)findViewById(R.id.divideButton);
+        final Button multB = (Button)findViewById(R.id.multiplyButton);
+        final Button minusB = (Button)findViewById(R.id.minusButton);
+        final Button divB = (Button)findViewById(R.id.divideButton);
         Button equalsB = (Button)findViewById(R.id.equalsButton);
-        Button plusB = (Button)findViewById(R.id.plusButton);
+        final Button plusB = (Button)findViewById(R.id.plusButton);
         Button sinB = (Button)findViewById(R.id.sinButton);
         final Button tanB = (Button)findViewById(R.id.tanButton);
         Button cosB = (Button)findViewById(R.id.cosButton);
@@ -620,6 +626,8 @@ public class MainActivity extends AppCompatActivity {
         multB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.rotate_around_center_point);
+                multB.startAnimation(animation);
                 currentCalculation += "*";
                 displayCalculation += "×";
                 calculationView.setText(displayCalculation);
@@ -629,6 +637,9 @@ public class MainActivity extends AppCompatActivity {
         plusB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.rotate_around_center_point);
+                plusB.startAnimation(animation);
+
                 currentCalculation += "+";
                 displayCalculation += "+";
                 calculationView.setText(displayCalculation);
@@ -663,6 +674,8 @@ public class MainActivity extends AppCompatActivity {
         divB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.rotate2);
+                divB.startAnimation(animation);
                 currentCalculation += "/";
                 displayCalculation += "÷";
                 calculationView.setText(displayCalculation);
@@ -682,6 +695,8 @@ public class MainActivity extends AppCompatActivity {
         minusB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.rotate_around_center_point);
+                minusB.startAnimation(animation);
                 currentCalculation += "-";
                 displayCalculation += "-";
                 calculationView.setText(displayCalculation);
@@ -701,6 +716,8 @@ public class MainActivity extends AppCompatActivity {
         delB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 if(currentCalculation.length() < 1){
                     int a = 1;
                     Log.e("limiting", "now");
@@ -746,6 +763,48 @@ public class MainActivity extends AppCompatActivity {
         clrB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final View myView = findViewById(R.id.awesome_card);
+
+                myView.setBackgroundColor(getResources().getColor(R.color.lightbluee));
+
+                // get the center for the clipping circle
+                int cx = (myView.getLeft() + myView.getRight()) / 2;
+                int cy = (myView.getTop() + myView.getBottom()) / 2;
+
+                // get the final radius for the clipping circle
+                int dx = Math.max(cx, myView.getWidth() - cx);
+                int dy = Math.max(cy, myView.getHeight() - cy);
+                float finalRadius = (float) Math.hypot(dx, dy);
+
+                // Android native animator
+
+                Animator animator =
+                        ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
+                animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                animator.setDuration(325);
+
+                animator.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        myView.setBackgroundColor(Color.TRANSPARENT);
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
+                animator.start();
                 currentCalculation = " ";
                 displayCalculation = " ";
                 calculationView.setText(displayCalculation);
@@ -839,6 +898,12 @@ public class MainActivity extends AppCompatActivity {
         equalsB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
+
+
+
                 if(currentCalculation.equals("") || currentCalculation.equals(" ") || currentCalculation.equals("   ")){
                     return;
                 }
@@ -962,6 +1027,10 @@ public class MainActivity extends AppCompatActivity {
                     })
                     //.setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
+        }
+        if(item.getItemId() == R.id.action_settings){
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);    }
 
