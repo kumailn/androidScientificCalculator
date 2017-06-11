@@ -14,5 +14,7 @@
     <color name="clearView">#a299cc00</color>
     <color name="naturalTeal">#009688</color>
     <color name="naturalBlack">#263238</color>
+    <color name="smallTextColor">#63bfe1</color>
+    <color name="myGray">#aaa</color>
 
 </resources>

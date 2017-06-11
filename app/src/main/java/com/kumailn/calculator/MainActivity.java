@@ -22,7 +22,10 @@ import android.view.MenuItem;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -32,6 +35,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.mariuszgromada.math.mxparser.Expression;
+
+import java.text.DecimalFormat;
 
 import io.codetail.animation.ViewAnimationUtils;
 
@@ -106,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         Log.e("A", String.valueOf(myToolbar.getDrawingCacheBackgroundColor()));
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
+
 
 
 
@@ -115,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             angleB.setText("DEG");
-            angleB.setTextColor(getResources().getColor(R.color.degree));
+            //angleB.setTextColor(getResources().getColor(R.color.degree));
             angle = true;
         }
 
@@ -621,7 +629,7 @@ public class MainActivity extends AppCompatActivity {
                 if(exponentOn == true){
                     exponentOn = false;
                     currentCalculation += ")";
-                    exponentB.setTextColor(getResources().getColor(R.color.black));
+                    exponentB.setTextColor(getResources().getColor(R.color.myGray));
                 }
                 else{
                     exponentOn = true;
@@ -640,6 +648,8 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "*";
                 displayCalculation += "×";
                 calculationView.setText(displayCalculation);
+                Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vv.vibrate(80);
             }
         });
 
@@ -652,6 +662,8 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "+";
                 displayCalculation += "+";
                 calculationView.setText(displayCalculation);
+                Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vv.vibrate(80);
             }
         });
 
@@ -688,6 +700,8 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "/";
                 displayCalculation += "÷";
                 calculationView.setText(displayCalculation);
+                Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vv.vibrate(80);
             }
         });
 
@@ -709,6 +723,8 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "-";
                 displayCalculation += "-";
                 calculationView.setText(displayCalculation);
+                Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vv.vibrate(80);
             }
         });
 
@@ -725,7 +741,8 @@ public class MainActivity extends AppCompatActivity {
         delB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vv.vibrate(50);
 
                 if(displayCalculation.length() < 1){
                     int a = 1;
@@ -778,6 +795,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vv.vibrate(120);
+
+                Animation fadeOut = new AlphaAnimation(1, 0);
+                fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
+                fadeOut.setStartOffset(300);
+                fadeOut.setDuration(500);
+
 
                 // previously invisible view
                 final View mv = findViewById(R.id.awesome_card);
@@ -793,6 +818,12 @@ public class MainActivity extends AppCompatActivity {
                 // create the animator for this view (the start radius is zero)
                 Animator anim =
                         ViewAnimationUtils.createCircularReveal(mv, centerX, centerY, startRadius, endRadius);
+
+
+                AnimationSet animation = new AnimationSet(false); //change to false
+                animation.addAnimation(fadeOut);
+                mv.setAnimation(animation);
+
 
                 anim.setDuration(300);
                 // make the view visible and start the animation
@@ -826,7 +857,7 @@ public class MainActivity extends AppCompatActivity {
                 if(exponentOn == true){
                     exponentOn = false;
                     firstExponent = true;
-                    exponentB.setTextColor(getResources().getColor(R.color.black));
+                    //exponentB.setTextColor(getResources().getColor(R.color.black));
                 }
 
                 //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_in_left));
@@ -922,7 +953,8 @@ public class MainActivity extends AppCompatActivity {
 
                 v.playSoundEffect(SoundEffectConstants.CLICK);
 
-
+                Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vv.vibrate(110);
 
 
                 if(currentCalculation.equals("") || currentCalculation.equals(" ") || currentCalculation.equals("   ")){
@@ -946,9 +978,17 @@ public class MainActivity extends AppCompatActivity {
                 if (result.endsWith(".0")){
                     result = result.substring(0, result.length() - 2);
                 }
-                if(result.length() > 22){
-                    result = result.substring(0,12);
+
+                try{
+                    double dd = Double.parseDouble(result);
+                    String df = new DecimalFormat("#####################################.############").format(dd);
+                    result = df;
+
                 }
+                catch (Exception f){
+
+                }
+
 
                 if (pVisible == true){
                     pView.setVisibility(View.INVISIBLE);
@@ -1008,14 +1048,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(angle == true){
                     angleB.setText("RAD");
-                    angleB.setTextColor(Color.RED);
+                    //angleB.setTextColor(Color.RED);
                     saveAngle("rad");
                     angle = false;
                     //currentCalculation.replaceAll("rad", "deg");
                 }
                 else{
                     angleB.setText("DEG");
-                    angleB.setTextColor(getResources().getColor(R.color.degree));
+                    //angleB.setTextColor(getResources().getColor(R.color.degree));
                     saveAngle("deg");
                     angle = true;
                     //currentCalculation.replaceAll("deg", "rad");
@@ -1054,8 +1094,9 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
         if(item.getItemId() == R.id.action_settings){
-            Intent i = new Intent(this, SettingsActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(this, SettingsActivity.class);
+            //startActivity(i);
+            Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);    }
 
