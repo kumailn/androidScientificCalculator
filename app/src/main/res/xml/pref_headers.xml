@@ -4,7 +4,7 @@
 
     <header
         android:fragment="com.kumailn.calculator.SettingsActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_info_black_24dp"
+        android:icon="@drawable/color_action"
         android:title="@string/pref_header_general" />
 
     <header

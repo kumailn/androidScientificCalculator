@@ -19,6 +19,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
@@ -26,6 +27,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button zeroB = (Button)findViewById(R.id.sinButton);
+        Button zeroB = (Button)findViewById(R.id.zeroButton);
         Button oneB = (Button)findViewById(R.id.oneButton);
         Button twoB = (Button)findViewById(R.id.twoButton);
         Button threeB = (Button)findViewById(R.id.threeButton);
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Button sevenB = (Button)findViewById(R.id.sevenButton);
         Button eightB = (Button)findViewById(R.id.eightButton);
         Button nineB = (Button)findViewById(R.id.nineButton);
-        Button decimalB = (Button)findViewById(R.id.sinButton);
+        Button decimalB = (Button)findViewById(R.id.decimalButton);
         Button ansB = (Button)findViewById(R.id.ansButton);
         final Button multB = (Button)findViewById(R.id.multiplyButton);
         final Button minusB = (Button)findViewById(R.id.minusButton);
@@ -103,13 +105,16 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
 
+        Log.e("A", String.valueOf(myToolbar.getDrawingCacheBackgroundColor()));
+
+
 
         if(loadAngle().equals("rad")){
-            angleB.setText("R");
+            angleB.setText("RAD");
             angle = false;
         }
         else{
-            angleB.setText("D");
+            angleB.setText("DEG");
             angleB.setTextColor(getResources().getColor(R.color.degree));
             angle = true;
         }
@@ -131,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         zeroB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(exponentOn == true){
                     if (firstExponent == true){
                         currentCalculation += "^(0";
@@ -154,6 +160,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+
+
+                //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_right));
             }
         });
 
@@ -718,7 +727,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                if(currentCalculation.length() < 1){
+                if(displayCalculation.length() < 1){
                     int a = 1;
                     Log.e("limiting", "now");
                 }
@@ -750,6 +759,11 @@ public class MainActivity extends AppCompatActivity {
                         displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 2);
                         calculationView.setText(displayCalculation);
                     }
+                    else if(currentCalculation.endsWith("Error")){
+                        currentCalculation = currentCalculation.substring(0, currentCalculation.length() - 5);
+                        displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 5);
+                        calculationView.setText(displayCalculation);
+                    }
                     else{
                         currentCalculation = currentCalculation.substring(0, currentCalculation.length() - 1);
                         displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 1);
@@ -763,27 +777,26 @@ public class MainActivity extends AppCompatActivity {
         clrB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final View myView = findViewById(R.id.awesome_card);
 
-                myView.setBackgroundColor(getResources().getColor(R.color.lightbluee));
+
+                // previously invisible view
+                final View mv = findViewById(R.id.awesome_card);
 
                 // get the center for the clipping circle
-                int cx = (myView.getLeft() + myView.getRight()) / 2;
-                int cy = (myView.getTop() + myView.getBottom()) / 2;
+                int centerX = (mv.getRight());
+                int centerY = (mv.getBottom());
 
+                int startRadius = 0;
                 // get the final radius for the clipping circle
-                int dx = Math.max(cx, myView.getWidth() - cx);
-                int dy = Math.max(cy, myView.getHeight() - cy);
-                float finalRadius = (float) Math.hypot(dx, dy);
+                int endRadius = Math.max(mv.getWidth(), mv.getHeight());
 
-                // Android native animator
+                // create the animator for this view (the start radius is zero)
+                Animator anim =
+                        ViewAnimationUtils.createCircularReveal(mv, centerX, centerY, startRadius, endRadius);
 
-                Animator animator =
-                        ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, finalRadius);
-                animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                animator.setDuration(325);
-
-                animator.addListener(new Animator.AnimatorListener() {
+                anim.setDuration(300);
+                // make the view visible and start the animation
+                anim.addListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
 
@@ -791,7 +804,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        myView.setBackgroundColor(Color.TRANSPARENT);
+                        mv.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -804,7 +817,9 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-                animator.start();
+                mv.setVisibility(View.VISIBLE);
+                anim.start();
+
                 currentCalculation = " ";
                 displayCalculation = " ";
                 calculationView.setText(displayCalculation);
@@ -813,6 +828,11 @@ public class MainActivity extends AppCompatActivity {
                     firstExponent = true;
                     exponentB.setTextColor(getResources().getColor(R.color.black));
                 }
+
+                //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_in_left));
+
+                //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_right));
+
 
             }
         });
@@ -900,6 +920,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+                v.playSoundEffect(SoundEffectConstants.CLICK);
 
 
 
@@ -933,11 +954,15 @@ public class MainActivity extends AppCompatActivity {
                     pView.setVisibility(View.INVISIBLE);
                     pVisible = false;
                 }
-                calculationView.setText(" " + result);
-                displayCalculation = " " + result;
+
                 if(!(result.equals("NaN"))){
                     previousAns = result;
                 }
+                else{
+                    result = "Error";
+                }
+                calculationView.setText(" " + result);
+                displayCalculation = " " + result;
                 currentCalculation = result;
 
 
@@ -982,14 +1007,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(angle == true){
-                    angleB.setText("R");
+                    angleB.setText("RAD");
                     angleB.setTextColor(Color.RED);
                     saveAngle("rad");
                     angle = false;
                     //currentCalculation.replaceAll("rad", "deg");
                 }
                 else{
-                    angleB.setText("D");
+                    angleB.setText("DEG");
                     angleB.setTextColor(getResources().getColor(R.color.degree));
                     saveAngle("deg");
                     angle = true;

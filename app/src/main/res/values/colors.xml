@@ -9,5 +9,10 @@
     <color name="cream">#fffafa</color>
     <color name="cream2">#eee9e9</color>
     <color name="lightbluee">#95efff</color>
+    <color name="alisColor">#c6fc3737</color>
+    <color name="alisColor2">#6d7d94</color>
+    <color name="clearView">#a299cc00</color>
+    <color name="naturalTeal">#009688</color>
+    <color name="naturalBlack">#263238</color>
 
 </resources>
