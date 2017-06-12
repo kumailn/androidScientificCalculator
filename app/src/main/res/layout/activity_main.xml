@@ -581,15 +581,14 @@
         android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="21dp"
-        android:layout_marginBottom="116dp"
-        android:layout_marginLeft="179dp"
-        android:layout_marginStart="179dp"
+        android:layout_marginBottom="118dp"
+        android:layout_marginRight="149dp"
         android:text="mod"
         android:textColor="@color/smallTextColor"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView13"
@@ -612,7 +611,7 @@
         android:layout_marginBottom="249dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:text="GCD"
+        android:text="LCM"
         android:textColor="@color/smallTextColor"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -652,7 +651,7 @@
         android:layout_marginBottom="249dp"
         android:layout_marginLeft="104dp"
         android:layout_marginStart="104dp"
-        android:text="LCM"
+        android:text="GCD"
         android:textColor="@color/smallTextColor"
         android:textSize="12sp"
         android:textStyle="bold"

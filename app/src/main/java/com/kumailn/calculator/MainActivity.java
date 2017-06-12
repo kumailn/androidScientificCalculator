@@ -144,28 +144,12 @@ public class MainActivity extends AppCompatActivity {
         zeroB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentCalculation += "0";
+                displayCalculation += "0";
+                calculationView.setText(displayCalculation);
+                editT.setText(displayCalculation);
+                editT.setSelection(displayCalculation.length());
 
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(0";
-                        displayCalculation += "⁰";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "0";
-                        displayCalculation += "⁰";
-                        calculationView.setText(displayCalculation);
-                    }
-
-                }
-                else{
-                    currentCalculation += "0";
-                    displayCalculation += "0";
-                    calculationView.setText(displayCalculation);
-                    editT.setText(displayCalculation);
-                    editT.setSelection(displayCalculation.length());
-                }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
 
@@ -187,25 +171,11 @@ public class MainActivity extends AppCompatActivity {
         oneB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(1";
-                        displayCalculation += "¹";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "1";
-                        displayCalculation += "¹";
-                        calculationView.setText(displayCalculation);
-                    }
 
-                }
-                else{
-                    currentCalculation += "1";
-                    displayCalculation += "1";
-                    calculationView.setText(displayCalculation);
-                }
+                currentCalculation += "1";
+                displayCalculation += "1";
+                calculationView.setText(displayCalculation);
+
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
 
@@ -225,25 +195,11 @@ public class MainActivity extends AppCompatActivity {
         twoB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(2";
-                        displayCalculation += "²";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "2";
-                        displayCalculation += "²";
-                        calculationView.setText(displayCalculation);
-                    }
 
-                }
-                else{
-                    currentCalculation += "2";
-                    displayCalculation += "2";
-                    calculationView.setText(displayCalculation);
-                }
+                currentCalculation += "2";
+                displayCalculation += "2";
+                calculationView.setText(displayCalculation);
+
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -262,25 +218,11 @@ public class MainActivity extends AppCompatActivity {
         threeB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(3";
-                        displayCalculation += "³";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "3";
-                        displayCalculation += "³";
-                        calculationView.setText(displayCalculation);
-                    }
 
-                }
-                else{
-                    currentCalculation += "3";
-                    displayCalculation += "3";
-                    calculationView.setText(displayCalculation);
-                }
+                currentCalculation += "3";
+                displayCalculation += "3";
+                calculationView.setText(displayCalculation);
+
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -301,25 +243,11 @@ public class MainActivity extends AppCompatActivity {
         fourB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(4";
-                        displayCalculation += "⁴";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "4";
-                        displayCalculation += "⁴";
-                        calculationView.setText(displayCalculation);
-                    }
 
-                }
-                else{
-                    currentCalculation += "4";
-                    displayCalculation += "4";
-                    calculationView.setText(displayCalculation);
-                }
+                currentCalculation += "4";
+                displayCalculation += "4";
+                calculationView.setText(displayCalculation);
+
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -328,25 +256,11 @@ public class MainActivity extends AppCompatActivity {
         fiveB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(5";
-                        displayCalculation += "⁵";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "5";
-                        displayCalculation += "⁵";
-                        calculationView.setText(displayCalculation);
-                    }
 
-                }
-                else{
-                    currentCalculation += "5";
-                    displayCalculation += "5";
-                    calculationView.setText(displayCalculation);
-                }
+                currentCalculation += "5";
+                displayCalculation += "5";
+                calculationView.setText(displayCalculation);
+
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -355,25 +269,11 @@ public class MainActivity extends AppCompatActivity {
         sixB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(6";
-                        displayCalculation += "⁶";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "6";
-                        displayCalculation += "⁶";
-                        calculationView.setText(displayCalculation);
-                    }
 
-                }
-                else{
-                    currentCalculation += "6";
-                    displayCalculation += "6";
-                    calculationView.setText(displayCalculation);
-                }
+                currentCalculation += "6";
+                displayCalculation += "6";
+                calculationView.setText(displayCalculation);
+
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -382,25 +282,11 @@ public class MainActivity extends AppCompatActivity {
         sevenB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(7";
-                        displayCalculation += "⁷";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "7";
-                        displayCalculation += "⁷";
-                        calculationView.setText(displayCalculation);
-                    }
 
-                }
-                else{
-                    currentCalculation += "7";
-                    displayCalculation += "7";
-                    calculationView.setText(displayCalculation);
-                }
+                currentCalculation += "7";
+                displayCalculation += "7";
+                calculationView.setText(displayCalculation);
+
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -419,25 +305,10 @@ public class MainActivity extends AppCompatActivity {
         eightB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
-                    if (firstExponent == true){
-                        currentCalculation += "^(8";
-                        displayCalculation += "⁸";
-                        calculationView.setText(displayCalculation);
-                        firstExponent = false;
-                    }
-                    else {
-                        currentCalculation += "8";
-                        displayCalculation += "⁸";
-                        calculationView.setText(displayCalculation);
-                    }
+                currentCalculation += "8";
+                displayCalculation += "8";
+                calculationView.setText(displayCalculation);
 
-                }
-                else{
-                    currentCalculation += "8";
-                    displayCalculation += "8";
-                    calculationView.setText(displayCalculation);
-                }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -459,13 +330,13 @@ public class MainActivity extends AppCompatActivity {
                 if(exponentOn == true){
                     if (firstExponent == true){
                         currentCalculation += "^(9";
-                        displayCalculation += "⁹";
+                        displayCalculation += "^(9";
                         calculationView.setText(displayCalculation);
                         firstExponent = false;
                     }
                     else {
                         currentCalculation += "9";
-                        displayCalculation += "⁹";
+                        displayCalculation += "9";
                         calculationView.setText(displayCalculation);
                     }
 
@@ -626,7 +497,10 @@ public class MainActivity extends AppCompatActivity {
         exponentB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(exponentOn == true){
+                currentCalculation += "^(";
+                displayCalculation += "^(";
+                calculationView.setText(displayCalculation);
+                /*if(exponentOn == true){
                     exponentOn = false;
                     currentCalculation += ")";
                     exponentB.setTextColor(getResources().getColor(R.color.myGray));
@@ -636,7 +510,7 @@ public class MainActivity extends AppCompatActivity {
                     firstExponent = true;
                     exponentB.setTextColor(getResources().getColor(R.color.colorAccent));
 
-                }
+                }*/
             }
         });
 
@@ -779,6 +653,16 @@ public class MainActivity extends AppCompatActivity {
                     else if(currentCalculation.endsWith("Error")){
                         currentCalculation = currentCalculation.substring(0, currentCalculation.length() - 5);
                         displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 5);
+                        calculationView.setText(displayCalculation);
+                    }
+                    else if(currentCalculation.endsWith("pi")){
+                        currentCalculation = currentCalculation.substring(0, currentCalculation.length() - 2);
+                        displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 1);
+                        calculationView.setText(displayCalculation);
+                    }
+                    else if(currentCalculation.endsWith("[phi]")){
+                        currentCalculation = currentCalculation.substring(0, currentCalculation.length() - 5);
+                        displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 1);
                         calculationView.setText(displayCalculation);
                     }
                     else{
@@ -965,10 +849,15 @@ public class MainActivity extends AppCompatActivity {
                     currentCalculation += ")";
                     exponentOn = false;
                     firstExponent = true;
-                    exponentB.setTextColor(getResources().getColor(R.color.black));
+                    //exponentB.setTextColor(getResources().getColor(R.color.black));
                 }
 
                 Log.e("currentC", currentCalculation);
+
+                if(currentCalculation.contains("pi")){
+                    String xx = currentCalculation;
+                    xx = xx.substring(0, 4) + "." + xx.substring(4, xx.length());
+                }
 
                 Expression e = new Expression(currentCalculation);
                 String result = String.valueOf(e.calculate());
@@ -981,8 +870,11 @@ public class MainActivity extends AppCompatActivity {
 
                 try{
                     double dd = Double.parseDouble(result);
-                    String df = new DecimalFormat("#####################################.############").format(dd);
-                    result = df;
+                    if(!result.contains("E")){
+                        String df = new DecimalFormat("#######################.############").format(dd);
+                        result = df;
+                    }
+
 
                 }
                 catch (Exception f){
