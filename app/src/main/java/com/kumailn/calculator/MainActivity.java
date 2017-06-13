@@ -904,9 +904,11 @@ public class MainActivity extends AppCompatActivity {
         binButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newR = previousAns.replaceAll("\\s+","");;
+                //String newR = previousAns.replaceAll("\\s+","");;
+                String ccv = String.valueOf(calculationView.getText());
                 try{
-                    Integer newR2 = Integer.parseInt(newR);
+                    ccv = ccv.replaceAll("\\s+","");;
+                    Integer newR2 = Integer.parseInt(ccv);
                     calculationView.setText(Integer.toBinaryString(newR2));
                 }
                 catch (Exception e){}
@@ -916,9 +918,11 @@ public class MainActivity extends AppCompatActivity {
         binButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                String newR = previousAns.replaceAll("\\s+","");
+                //String newR = previousAns.replaceAll("\\s+","");
+                String ccv = String.valueOf(calculationView.getText());
                 try{
-                    Integer newR2 = Integer.parseInt(newR);
+                    ccv = ccv.replaceAll("\\s+","");;
+                    Integer newR2 = Integer.parseInt(ccv);
                     calculationView.setText(Integer.toHexString(newR2));
                 }
                 catch (Exception e){}
