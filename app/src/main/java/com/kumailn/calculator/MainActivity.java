@@ -14,13 +14,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SoundEffectConstants;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -35,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.mariuszgromada.math.mxparser.Expression;
+import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 
@@ -58,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Button zeroB = (Button)findViewById(R.id.zeroButton);
         Button oneB = (Button)findViewById(R.id.oneButton);
@@ -86,11 +92,15 @@ public class MainActivity extends AppCompatActivity {
         Button lnB = (Button)findViewById(R.id.lnButton);
         Button binButton = (Button)findViewById(R.id.bbb);
         Button sqrtB = (Button)findViewById(R.id.sqrtButton);
-        final EditText editT = (EditText)findViewById(R.id.editText1);
+        final Button popupB = (Button)findViewById(R.id.popupButton);
+        final TextView calculationView = (TextView)findViewById(R.id.instantCalcluationView);
         final TextView pView = (TextView)findViewById(R.id.primeView);
         final Button angleB = (Button)findViewById(R.id.angleButton);
         final Button exponentB = (Button) findViewById(R.id.exponentButton);
-        final TextView calculationView = (TextView)findViewById(R.id.calcView);
+        final TextView instantCalcView = (TextView)findViewById(R.id.calcView);
+        //instantCalcView
+
+
 
 
         currentCalculation = " ";
@@ -98,20 +108,17 @@ public class MainActivity extends AppCompatActivity {
         pVisible = false;
         exponentOn = false;
         pView.setVisibility(TextView.INVISIBLE);
-        android.support.v7.app.ActionBar bar = getSupportActionBar();
+        //android.support.v7.app.ActionBar bar = getSupportActionBar();
         //bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33B5E5")));
 
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        editT.setInputType(InputType.TYPE_NULL);
-        editT.setTextIsSelectable(true);
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+       /* Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);*/
 
 
-        Log.e("A", String.valueOf(myToolbar.getDrawingCacheBackgroundColor()));
-        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+/*        Log.e("A", String.valueOf(myToolbar.getDrawingCacheBackgroundColor()));
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);*/
 
 
 
@@ -139,6 +146,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        popupB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(MainActivity.this, popupB);
+                popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getTitle().equals("Settings")){
+                            Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            AlertDialog.Builder builder;
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                            } else {
+                                builder = new AlertDialog.Builder(MainActivity.this);
+                            }
+                            builder.setTitle("About the app")
+                                    .setMessage("Made by Kumail Naqvi, 2017, Version 1.0, Contact me at kumailmn@gmail.com, github.com/kumailn")
+                                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // continue with delete
+                                        }
+
+                                    })
+                                    //.setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }
+
+                        return true;
+                    }
+
+                });
+                popup.show();
+            }
+        });
+
 
 
         zeroB.setOnClickListener(new View.OnClickListener() {
@@ -147,11 +192,11 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "0";
                 displayCalculation += "0";
                 calculationView.setText(displayCalculation);
-                editT.setText(displayCalculation);
-                editT.setSelection(displayCalculation.length());
+
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
 
 
                 //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_right));
@@ -164,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "!";
                 displayCalculation += "!";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -178,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
 
             }
         });
@@ -188,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "e";
                 displayCalculation += "e";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -202,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -211,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "[phi]";
                 displayCalculation += "φ";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -225,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -234,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "#";
                 displayCalculation += "%";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -250,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -263,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -276,6 +330,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
+
             }
         });
 
@@ -289,6 +345,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -298,6 +355,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "lcm(";
                 displayCalculation += "LCM(";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -311,6 +369,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -320,6 +379,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "gcd(";
                 displayCalculation += "GCD(";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -348,6 +408,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -357,6 +418,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "log(10,";
                 displayCalculation += "log(";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
             }
         });
 
@@ -366,6 +428,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "ln(";
                 displayCalculation += "ln(";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
             }
         });
 
@@ -375,6 +438,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += ")";
                 displayCalculation += ")";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
             }
         });
 
@@ -384,6 +448,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "(";
                 displayCalculation += "(";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -395,12 +460,14 @@ public class MainActivity extends AppCompatActivity {
                     currentCalculation += "sin([deg]*";
                     displayCalculation += "sin(";
                     calculationView.setText(displayCalculation);
+
                 }
                 else{
                     currentCalculation += "sin([rad]*";
                     displayCalculation += "sin(";
                     calculationView.setText(displayCalculation);
                 }
+                equalsMethod();
 
             }
         });
@@ -412,12 +479,14 @@ public class MainActivity extends AppCompatActivity {
                     currentCalculation += "asin([deg]*";
                     displayCalculation += "arcsin(";
                     calculationView.setText(displayCalculation);
+                    equalsMethod();
                     return true;
                 }
                 else {
                     currentCalculation += "asin([rad]*";
                     displayCalculation += "arcsin(";
                     calculationView.setText(displayCalculation);
+                    equalsMethod();
                     return true;
                 }
 
@@ -437,6 +506,7 @@ public class MainActivity extends AppCompatActivity {
                     displayCalculation += "cos(";
                     calculationView.setText(displayCalculation);
                 }
+                equalsMethod();
             }
         });
 
@@ -447,12 +517,14 @@ public class MainActivity extends AppCompatActivity {
                     currentCalculation += "acos([deg]*";
                     displayCalculation += "arccos(";
                     calculationView.setText(displayCalculation);
+                    equalsMethod();
                     return true;
                 }
                 else{
                     currentCalculation += "acos([rad]*";
                     displayCalculation += "arccos(";
                     calculationView.setText(displayCalculation);
+                    equalsMethod();
                     return true;
                 }
 
@@ -472,6 +544,7 @@ public class MainActivity extends AppCompatActivity {
                     displayCalculation += "tan(";
                     calculationView.setText(displayCalculation);
                 }
+                equalsMethod();
 
             }
         });
@@ -483,12 +556,14 @@ public class MainActivity extends AppCompatActivity {
                     currentCalculation += "atan([deg]*";
                     displayCalculation += "arctan(";
                     calculationView.setText(displayCalculation);
+                    equalsMethod();
                     return true;
                 }
                 else{
                     currentCalculation += "atan([rad]*";
                     displayCalculation += "arctan(";
                     calculationView.setText(displayCalculation);
+                    equalsMethod();
                     return true;
                 }
             }
@@ -500,6 +575,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "^(";
                 displayCalculation += "^(";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 /*if(exponentOn == true){
                     exponentOn = false;
                     currentCalculation += ")";
@@ -524,6 +600,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
+                equalsMethod();
             }
         });
 
@@ -538,6 +615,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
+                equalsMethod();
             }
         });
 
@@ -576,6 +654,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
+                equalsMethod();
             }
         });
 
@@ -585,7 +664,9 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "C(";
                 displayCalculation += "C(";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
+
             }
         });
 
@@ -599,6 +680,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
+                equalsMethod();
             }
         });
 
@@ -608,6 +690,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += ",";
                 displayCalculation += ",";
                 calculationView.setText(displayCalculation);
+                equalsMethod();
                 return true;
             }
         });
@@ -671,6 +754,7 @@ public class MainActivity extends AppCompatActivity {
                         calculationView.setText(displayCalculation);
                     }
                 }
+                equalsMethod();
 
             }
         });
@@ -684,8 +768,8 @@ public class MainActivity extends AppCompatActivity {
 
                 Animation fadeOut = new AlphaAnimation(1, 0);
                 fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
-                fadeOut.setStartOffset(300);
-                fadeOut.setDuration(500);
+                fadeOut.setStartOffset(200);
+                fadeOut.setDuration(400);
 
 
                 // previously invisible view
@@ -707,6 +791,9 @@ public class MainActivity extends AppCompatActivity {
                 AnimationSet animation = new AnimationSet(false); //change to false
                 animation.addAnimation(fadeOut);
                 mv.setAnimation(animation);
+
+                pView.setVisibility(View.INVISIBLE);
+                pVisible = false;
 
 
                 anim.setDuration(300);
@@ -743,7 +830,7 @@ public class MainActivity extends AppCompatActivity {
                     firstExponent = true;
                     //exponentB.setTextColor(getResources().getColor(R.color.black));
                 }
-
+                instantCalcView.setText("");
                 //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_in_left));
 
                 //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_right));
@@ -776,6 +863,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
             }
         });
 
@@ -803,6 +891,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
+                equalsMethod();
                 return true;
             }
         });
@@ -815,6 +904,7 @@ public class MainActivity extends AppCompatActivity {
                     displayCalculation += previousAns;
                     calculationView.setText(displayCalculation);
                 }
+                equalsMethod();
 
             }
         });
@@ -893,7 +983,8 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     result = "Error";
                 }
-                calculationView.setText(" " + result);
+                instantCalcView.setText(" " + result);
+                calculationView.setText(" "+ result);
                 displayCalculation = " " + result;
                 currentCalculation = result;
 
@@ -910,9 +1001,11 @@ public class MainActivity extends AppCompatActivity {
                     ccv = ccv.replaceAll("\\s+","");;
                     Integer newR2 = Integer.parseInt(ccv);
                     calculationView.setText(Integer.toBinaryString(newR2));
+                    equalsMethod();
                 }
                 catch (Exception e){}
             }
+
         });
 
         binButton.setOnLongClickListener(new View.OnLongClickListener() {
@@ -924,6 +1017,7 @@ public class MainActivity extends AppCompatActivity {
                     ccv = ccv.replaceAll("\\s+","");;
                     Integer newR2 = Integer.parseInt(ccv);
                     calculationView.setText(Integer.toHexString(newR2));
+                    equalsMethod();
                 }
                 catch (Exception e){}
                 return true;
@@ -962,7 +1056,72 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
+    public void equalsMethod(){
+        TextView calculationView = (TextView)findViewById(R.id.calcView);
+
+        try {
+            //currentCalculation = currentCalculation.replace("Ans", previousAns);
+            //displayCalculation = displayCalculation.replace("Ans", previousAns);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(currentCalculation.equals("") || currentCalculation.equals(" ") || currentCalculation.equals("   ")){
+            return;
+        }
+
+        if(exponentOn == true){
+            currentCalculation += ")";
+            exponentOn = false;
+            firstExponent = true;
+            //exponentB.setTextColor(getResources().getColor(R.color.black));
+        }
+
+        Log.e("currentC", currentCalculation);
+
+        if(currentCalculation.contains("pi")){
+            String xx = currentCalculation;
+            xx = xx.substring(0, 4) + "." + xx.substring(4, xx.length());
+        }
+
+        Expression e = new Expression(currentCalculation);
+        String result = String.valueOf(e.calculate());
+        if(result.endsWith("E-16") || result.endsWith("E-15") || result.endsWith("E-14")){
+            result = "0";
+        }
+        if (result.endsWith(".0")){
+            result = result.substring(0, result.length() - 2);
+        }
+
+        try{
+            double dd = Double.parseDouble(result);
+            if(!result.contains("E")){
+                String df = new DecimalFormat("#######################.############").format(dd);
+                result = df;
+            }
+
+
+        }
+        catch (Exception f){
+
+        }
+
+        if(!(result.equals("NaN"))){
+            previousAns = result;
+        }
+        else{
+            result = "Error";
+        }
+        if(!result.equals("Error")){
+            //currentCalculation = currentCalculation.replace(previousAns, "Ans");
+            //displayCalculation = displayCalculation.replace(previousAns, "Ans");
+            calculationView.setText(" " + result);
+        }
+        //displayCalculation = " " + result;
+        //currentCalculation = result;
+    }
+
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflates menu
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -994,7 +1153,7 @@ public class MainActivity extends AppCompatActivity {
             //startActivity(i);
             Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
         }
-        return super.onOptionsItemSelected(item);    }
+        return super.onOptionsItemSelected(item);    }*/
 
     public void saveAngle(String meth){
         //Local data storage
@@ -1009,6 +1168,7 @@ public class MainActivity extends AppCompatActivity {
         String myMethod = sharedPreferences.getString("angle", defaultMethod);
         return (myMethod);
     }
+
 }
 
 /**

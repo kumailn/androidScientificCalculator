@@ -8,7 +8,7 @@
     tools:context="com.kumailn.calculator.MainActivity">
 
 
-    <android.support.v7.widget.Toolbar
+<!--    <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -20,14 +20,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
 
     <TextView
         android:id="@+id/calcView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="0dp"
         android:background="?attr/colorButtonNormal"
         android:backgroundTint="@android:color/white"
         android:fontFamily="sans-serif"
@@ -44,19 +44,33 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4" />
 
+    <Button
+        android:id="@+id/popupButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_shortcut_more_vert"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="363dp" />
+
     <io.codetail.widget.RevealFrameLayout
-        android:layout_width="500sp"
-        android:layout_height="0dp"
+        android:id="@+id/revealFrameLayout"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="-11dp"
-        android:layout_marginRight="-11dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="-8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintVertical_bias="1.0">
 
         <!-- Put more views here if you want, it's stock frame layout  -->
 
@@ -82,8 +96,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="-10dp"
-        android:layout_marginRight="-9dp"
         android:background="@color/naturalBlack"
         android:gravity="left|right"
         android:orientation="vertical"
@@ -565,6 +577,7 @@
 
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="0dp"
@@ -575,7 +588,8 @@
         android:textColor="@color/smallTextColor"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="104dp" />
 
     <TextView
         android:id="@+id/textView6"
@@ -588,7 +602,8 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="149dp" />
 
     <TextView
         android:id="@+id/textView13"
@@ -694,30 +709,20 @@
         android:textColor="@color/smallTextColor"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="16dp" />
 
     <TextView
         android:id="@+id/primeView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:text="true"
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:visibility="invisible"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="67dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -736,16 +741,35 @@
     <Button
         android:id="@+id/angleButton"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="66dp"
-        android:layout_height="41dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="65dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="7dp"
         android:text="RAD"
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/instantCalcluationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:gravity="bottom"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
 
