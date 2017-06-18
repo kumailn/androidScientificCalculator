@@ -16,6 +16,7 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -165,8 +166,10 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 builder = new AlertDialog.Builder(MainActivity.this);
                             }
+                            String nodata="<br/>&#8226; Version 1.5<br/>&#8226; Made by Kumail Naqvi, 2017<br/>&#8226; kumailmn@gmail.com<br/>&#8226; github.com/kumailn<br/>&#8226; powered by mXparser";
                             builder.setTitle("About the app")
-                                    .setMessage("Made by Kumail Naqvi, 2017, Version 1.5, Contact me at kumailmn@gmail.com, github.com/kumailn")
+                                    //.setMessage("Made by Kumail Naqvi, 2017, Version 1.5, Contact me at kumailmn@gmail.com, github.com/kumailn, powered by mXparser")
+                                    .setMessage(Html.fromHtml(nodata))
                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // continue with delete
