@@ -18,6 +18,9 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -166,10 +169,24 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 builder = new AlertDialog.Builder(MainActivity.this);
                             }
-                            String nodata="<br/>&#8226; Version 1.5<br/>&#8226; Made by Kumail Naqvi, 2017<br/>&#8226; kumailmn@gmail.com<br/>&#8226; github.com/kumailn<br/>&#8226; powered by mXparser";
+
+                            String nodata="<br/>&#8226; Version 1.5<br/>&#8226; Made by Kumail Naqvi, 2017<br/>&#8226; kumailmn@gmail.com<br/>&#8226; github.com/kumailn<br/>&#8226; powered by mXparser (mathparser.org)";
+                            final SpannableString ss = new SpannableString(Html.fromHtml(nodata));
+                            Linkify.addLinks(ss, Linkify.ALL);
+
+                            //added a TextView
+                            final TextView tx1=new TextView(MainActivity.this);
+                            tx1.setText(ss);
+                            tx1.setAutoLinkMask(RESULT_OK);
+                            tx1.setMovementMethod(LinkMovementMethod.getInstance());
+                            tx1.setTextSize(20);
+                            tx1.setTextColor(Color.WHITE);
+                            tx1.setPadding(48, 0, 0, 0);
+
                             builder.setTitle("About the app")
                                     //.setMessage("Made by Kumail Naqvi, 2017, Version 1.5, Contact me at kumailmn@gmail.com, github.com/kumailn, powered by mXparser")
-                                    .setMessage(Html.fromHtml(nodata))
+                                    //.setMessage(ss)
+                                    .setView(tx1)
                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // continue with delete
