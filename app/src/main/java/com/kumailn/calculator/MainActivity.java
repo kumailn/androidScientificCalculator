@@ -456,14 +456,23 @@ public class MainActivity extends AppCompatActivity {
         bracketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentCalculation += ")";
-                displayCalculation += ")";
-                calculationView.setText(displayCalculation);
-                equalsMethod();
+                if(currentCalculation.endsWith("*") || currentCalculation.endsWith("+") || currentCalculation.endsWith("-") || currentCalculation.endsWith("/")){
+                    currentCalculation += "(";
+                    displayCalculation += "(";
+                    calculationView.setText(displayCalculation);
+                    equalsMethod();
+                }
+                else{
+                    currentCalculation += ")";
+                    displayCalculation += ")";
+                    calculationView.setText(displayCalculation);
+                    equalsMethod();
+                }
+
             }
         });
 
-        bracketB.setOnLongClickListener(new View.OnLongClickListener() {
+        /*bracketB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 currentCalculation += "(";
@@ -472,7 +481,7 @@ public class MainActivity extends AppCompatActivity {
                 equalsMethod();
                 return true;
             }
-        });
+        });*/
 
         sinB.setOnClickListener(new View.OnClickListener() {
             @Override
