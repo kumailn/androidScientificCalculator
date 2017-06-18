@@ -1009,12 +1009,22 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     result = "Error";
+                    //result = "";
+
+
                 }
                 //instantCalcView.setText(" " + result);
-                instantCalcView.setText(" " + result);
-                calculationView.setText(" " + "Ans");
-                displayCalculation = (" " + "Ans");
-                currentCalculation = result;
+                if(result.equals("Error")){
+                    instantCalcView.setText(" " + result);
+                    result = "";
+                }
+                else{
+                    instantCalcView.setText(" " + result);
+                    calculationView.setText(" " + "Ans");
+                    displayCalculation = (" " + "Ans");
+                    currentCalculation = result;
+                }
+
 
 
             }
