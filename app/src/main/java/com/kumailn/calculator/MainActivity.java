@@ -749,6 +749,11 @@ public class MainActivity extends AppCompatActivity {
                         displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 1);
                         calculationView.setText(displayCalculation);
                     }
+                    else if(displayCalculation.endsWith("Ans")){
+                        currentCalculation = currentCalculation.substring(0, currentCalculation.length() - previousAns.length());
+                        displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 3);
+                        calculationView.setText(displayCalculation);
+                    }
                     else{
                         currentCalculation = currentCalculation.substring(0, currentCalculation.length() - 1);
                         displayCalculation = displayCalculation.substring(0, displayCalculation.length() - 1);
@@ -902,7 +907,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(previousAns != null){
                     currentCalculation += previousAns;
-                    displayCalculation += previousAns;
+                    displayCalculation += "Ans";
                     calculationView.setText(displayCalculation);
                 }
                 equalsMethod();
@@ -985,9 +990,10 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     result = "Error";
                 }
+                //instantCalcView.setText(" " + result);
                 instantCalcView.setText(" " + result);
-                calculationView.setText(" "+ result);
-                displayCalculation = " " + result;
+                calculationView.setText(" " + "Ans");
+                displayCalculation = (" " + "Ans");
                 currentCalculation = result;
 
 
@@ -1123,7 +1129,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(!(result.equals("NaN"))){
-            previousAns = result;
+            //previousAns = result;
         }
         else{
             result = "Error";
