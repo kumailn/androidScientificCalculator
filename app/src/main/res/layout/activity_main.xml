@@ -714,14 +714,14 @@
 
     <TextView
         android:id="@+id/primeView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="47dp"
+        android:layout_height="26dp"
         android:layout_marginTop="16dp"
         android:text="true"
         android:textColor="@android:color/darker_gray"
         android:textSize="18sp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginRight="67dp"
+        android:layout_marginRight="60dp"
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView

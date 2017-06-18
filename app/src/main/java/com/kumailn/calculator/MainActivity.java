@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         sqrtB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("square root", "Button pressed");
                 currentCalculation += "sqrt(";
                 displayCalculation += "√(";
                 calculationView.setText(displayCalculation);
@@ -165,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                                 builder = new AlertDialog.Builder(MainActivity.this);
                             }
                             builder.setTitle("About the app")
-                                    .setMessage("Made by Kumail Naqvi, 2017, Version 1.0, Contact me at kumailmn@gmail.com, github.com/kumailn")
+                                    .setMessage("Made by Kumail Naqvi, 2017, Version 1.5, Contact me at kumailmn@gmail.com, github.com/kumailn")
                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // continue with delete
@@ -942,7 +943,8 @@ public class MainActivity extends AppCompatActivity {
                     //exponentB.setTextColor(getResources().getColor(R.color.black));
                 }
 
-                Log.e("currentC", currentCalculation);
+                //Log.e("backgroundC", currentCalculation);
+                //Log.e("displayC", displayCalculation);
 
                 if(currentCalculation.contains("pi")){
                     String xx = currentCalculation;
@@ -996,12 +998,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //String newR = previousAns.replaceAll("\\s+","");;
-                String ccv = String.valueOf(calculationView.getText());
+                String ccv = String.valueOf(instantCalcView.getText());
+                Log.e("INBIN", ccv);
                 try{
                     ccv = ccv.replaceAll("\\s+","");;
                     Integer newR2 = Integer.parseInt(ccv);
-                    calculationView.setText(Integer.toBinaryString(newR2));
-                    equalsMethod();
+                    instantCalcView.setText(Integer.toBinaryString(newR2));
+                    //equalsMethod();
                 }
                 catch (Exception e){}
             }
@@ -1012,12 +1015,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 //String newR = previousAns.replaceAll("\\s+","");
-                String ccv = String.valueOf(calculationView.getText());
+                String ccv = String.valueOf(instantCalcView.getText());
                 try{
                     ccv = ccv.replaceAll("\\s+","");;
                     Integer newR2 = Integer.parseInt(ccv);
-                    calculationView.setText(Integer.toHexString(newR2));
-                    equalsMethod();
+                    instantCalcView.setText(Integer.toHexString(newR2));
+                    //equalsMethod();
                 }
                 catch (Exception e){}
                 return true;
@@ -1041,6 +1044,12 @@ public class MainActivity extends AppCompatActivity {
                     //angleB.setTextColor(Color.RED);
                     saveAngle("rad");
                     angle = false;
+                    String ccv = String.valueOf(currentCalculation);
+                    Log.e("CCV", ccv);
+                    ccv = ccv.replace("deg", "rad");
+                    Log.e("CCV2", ccv);
+                    currentCalculation = ccv;
+                    equalsMethod();
                     //currentCalculation.replaceAll("rad", "deg");
                 }
                 else{
@@ -1048,6 +1057,10 @@ public class MainActivity extends AppCompatActivity {
                     //angleB.setTextColor(getResources().getColor(R.color.degree));
                     saveAngle("deg");
                     angle = true;
+                    String ccv = String.valueOf(currentCalculation);
+                    ccv = ccv.replace("rad", "deg");
+                    currentCalculation = ccv;
+                    equalsMethod();
                     //currentCalculation.replaceAll("deg", "rad");
                 }
             }
@@ -1058,6 +1071,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void equalsMethod(){
         TextView calculationView = (TextView)findViewById(R.id.calcView);
+        TextView instantCalcView = (TextView)findViewById(R.id.instantCalcluationView);
+        TextView pView = (TextView)findViewById(R.id.primeView);
 
         try {
             //currentCalculation = currentCalculation.replace("Ans", previousAns);
@@ -1077,7 +1092,8 @@ public class MainActivity extends AppCompatActivity {
             //exponentB.setTextColor(getResources().getColor(R.color.black));
         }
 
-        Log.e("currentC", currentCalculation);
+        Log.e("backgroundC", currentCalculation);
+        Log.e("displayC", displayCalculation);
 
         if(currentCalculation.contains("pi")){
             String xx = currentCalculation;
@@ -1116,6 +1132,19 @@ public class MainActivity extends AppCompatActivity {
             //currentCalculation = currentCalculation.replace(previousAns, "Ans");
             //displayCalculation = displayCalculation.replace(previousAns, "Ans");
             calculationView.setText(" " + result);
+        }
+
+        if(pVisible == true){
+            Expression ex = new Expression("ispr(" + instantCalcView.getText()  + ")");
+            String result2 = String.valueOf(ex.calculate());
+            if(result2.equals("0.0")){
+                result2 = "false";
+            }
+            else{
+                result2 = "true";
+            }
+            pView.setText(result2);
+            pView.setVisibility(TextView.VISIBLE);
         }
         //displayCalculation = " " + result;
         //currentCalculation = result;
