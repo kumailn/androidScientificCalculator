@@ -2,6 +2,7 @@ package com.kumailn.calculator;
 
 import android.animation.Animator;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -36,8 +38,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,18 +73,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Button zeroB = (Button)findViewById(R.id.zeroButton);
-        Button oneB = (Button)findViewById(R.id.oneButton);
-        Button twoB = (Button)findViewById(R.id.twoButton);
-        Button threeB = (Button)findViewById(R.id.threeButton);
-        Button fourB = (Button)findViewById(R.id.fourButton);
-        Button fiveB = (Button)findViewById(R.id.fiveButton);
-        Button sixB = (Button)findViewById(R.id.sixButton);
-        Button sevenB = (Button)findViewById(R.id.sevenButton);
-        Button eightB = (Button)findViewById(R.id.eightButton);
-        Button nineB = (Button)findViewById(R.id.nineButton);
-        Button decimalB = (Button)findViewById(R.id.decimalButton);
-        Button ansB = (Button)findViewById(R.id.ansButton);
+        final Button zeroB = (Button)findViewById(R.id.zeroButton);
+        final Button oneB = (Button)findViewById(R.id.oneButton);
+        final Button twoB = (Button)findViewById(R.id.twoButton);
+        final Button threeB = (Button)findViewById(R.id.threeButton);
+        final Button fourB = (Button)findViewById(R.id.fourButton);
+        final Button fiveB = (Button)findViewById(R.id.fiveButton);
+        final Button sixB = (Button)findViewById(R.id.sixButton);
+        final Button sevenB = (Button)findViewById(R.id.sevenButton);
+        final Button eightB = (Button)findViewById(R.id.eightButton);
+        final Button nineB = (Button)findViewById(R.id.nineButton);
+        final Button decimalB = (Button)findViewById(R.id.decimalButton);
+        final Button ansB = (Button)findViewById(R.id.ansButton);
         final Button multB = (Button)findViewById(R.id.multiplyButton);
         final Button minusB = (Button)findViewById(R.id.minusButton);
         final Button divB = (Button)findViewById(R.id.divideButton);
@@ -102,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
         final Button angleB = (Button)findViewById(R.id.angleButton);
         final Button exponentB = (Button) findViewById(R.id.exponentButton);
         final TextView instantCalcView = (TextView)findViewById(R.id.calcView);
+        final LinearLayout myLinear = (LinearLayout)findViewById(R.id.linearLayout);
+        final ConstraintLayout myLayout = (ConstraintLayout)findViewById(R.id.myBackLayout);
+
         //instantCalcView
 
 
@@ -160,7 +167,67 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getTitle().equals("Settings")){
-                            Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
+                            builderSingle.setTitle("Set a theme:");
+
+                            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+                            arrayAdapter.add("Stealth Black");
+                            arrayAdapter.add("Minimal White");
+
+
+                            builderSingle.setNeutralButton("ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String strName = arrayAdapter.getItem(which);
+                                    Toast.makeText(MainActivity.this, strName, Toast.LENGTH_SHORT).show();
+
+                                    if(which == 0){
+                                        myLayout.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
+                                        myLinear.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
+                                        zeroB.setTextColor(Color.WHITE);
+                                        oneB.setTextColor(Color.WHITE);
+                                        twoB.setTextColor(Color.WHITE);
+                                        threeB.setTextColor(Color.WHITE);
+                                        fourB.setTextColor(Color.WHITE);
+                                        fiveB.setTextColor(Color.WHITE);
+                                        sixB.setTextColor(Color.WHITE);
+                                        sevenB.setTextColor(Color.WHITE);
+                                        eightB.setTextColor(Color.WHITE);
+                                        nineB.setTextColor(Color.WHITE);
+                                        decimalB.setTextColor(Color.WHITE);
+                                        ansB.setTextColor(Color.WHITE);
+
+
+
+
+                                    }
+                                    else if(which == 1){
+                                        myLayout.setBackgroundColor(Color.WHITE);
+                                        myLinear.setBackgroundColor(Color.WHITE);
+                                        zeroB.setTextColor(Color.BLACK);
+                                        oneB.setTextColor(Color.BLACK);
+                                        twoB.setTextColor(Color.BLACK);
+                                        threeB.setTextColor(Color.BLACK);
+                                        fourB.setTextColor(Color.BLACK);
+                                        fiveB.setTextColor(Color.BLACK);
+                                        sixB.setTextColor(Color.BLACK);
+                                        sevenB.setTextColor(Color.BLACK);
+                                        eightB.setTextColor(Color.BLACK);
+                                        nineB.setTextColor(Color.BLACK);
+                                        decimalB.setTextColor(Color.BLACK);
+                                        ansB.setTextColor(Color.BLACK);
+                                    }
+                                }
+                            });
+                            builderSingle.show();
                         }
                         else{
                             AlertDialog.Builder builder;
@@ -179,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                             tx1.setText(ss);
                             tx1.setAutoLinkMask(RESULT_OK);
                             tx1.setMovementMethod(LinkMovementMethod.getInstance());
-                            tx1.setTextSize(20);
+                            tx1.setTextSize(16);
                             tx1.setTextColor(Color.WHITE);
                             tx1.setPadding(48, 0, 0, 0);
 
@@ -456,7 +523,7 @@ public class MainActivity extends AppCompatActivity {
         bracketB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(currentCalculation.endsWith("*") || currentCalculation.endsWith("+") || currentCalculation.endsWith("-") || currentCalculation.endsWith("/")){
+                if(currentCalculation.endsWith("*") || currentCalculation.endsWith("+") || currentCalculation.endsWith("-") || currentCalculation.endsWith("/") || !(currentCalculation.contains("("))){
                     currentCalculation += "(";
                     displayCalculation += "(";
                     calculationView.setText(displayCalculation);
@@ -1112,6 +1179,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
+
     }
 
     public void equalsMethod(){
@@ -1199,6 +1269,8 @@ public class MainActivity extends AppCompatActivity {
         //currentCalculation = result;
     }
 
+
+
 /*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflates menu
@@ -1232,6 +1304,21 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);    }*/
+
+
+    public void saveTheme(String meth){
+        //Local data storage
+        SharedPreferences sharedPreferences = getSharedPreferences("myData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("theme", meth);
+        editor.commit();
+    }
+
+    public String loadTheme(){
+        SharedPreferences sharedPreferences = getSharedPreferences("myData", Context.MODE_PRIVATE);
+        String myMethod = sharedPreferences.getString("theme", defaultMethod);
+        return (myMethod);
+    }
 
     public void saveAngle(String meth){
         //Local data storage
