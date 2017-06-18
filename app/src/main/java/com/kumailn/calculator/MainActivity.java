@@ -1091,7 +1091,7 @@ public class MainActivity extends AppCompatActivity {
             firstExponent = true;
             //exponentB.setTextColor(getResources().getColor(R.color.black));
         }
-
+        //abc
         Log.e("backgroundC", currentCalculation);
         Log.e("displayC", displayCalculation);
 
@@ -1133,7 +1133,7 @@ public class MainActivity extends AppCompatActivity {
             //displayCalculation = displayCalculation.replace(previousAns, "Ans");
             calculationView.setText(" " + result);
         }
-
+        //
         if(pVisible == true){
             Expression ex = new Expression("ispr(" + instantCalcView.getText()  + ")");
             String result2 = String.valueOf(ex.calculate());
