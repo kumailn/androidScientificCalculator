@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -52,6 +53,7 @@ import org.w3c.dom.Text;
 import java.text.DecimalFormat;
 
 import io.codetail.animation.ViewAnimationUtils;
+import io.codetail.widget.RevealFrameLayout;
 
 //Kumail Naqvi June 5th 2017
 //test 1
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         final Button multB = (Button)findViewById(R.id.multiplyButton);
         final Button minusB = (Button)findViewById(R.id.minusButton);
         final Button divB = (Button)findViewById(R.id.divideButton);
-        Button equalsB = (Button)findViewById(R.id.equalsButton);
+        final Button equalsB = (Button)findViewById(R.id.equalsButton);
         final Button plusB = (Button)findViewById(R.id.plusButton);
         final Button sinB = (Button)findViewById(R.id.sinButton);
         final Button tanB = (Button)findViewById(R.id.tanButton);
@@ -108,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView instantCalcView = (TextView)findViewById(R.id.calcView);
         final LinearLayout myLinear = (LinearLayout)findViewById(R.id.linearLayout);
         final ConstraintLayout myLayout = (ConstraintLayout)findViewById(R.id.myBackLayout);
+        final RevealFrameLayout myReveal = (RevealFrameLayout)findViewById(R.id.revealFrameLayout);
+        final View mvv = findViewById(R.id.awesome_card);
 
         //instantCalcView
 
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         pVisible = false;
         exponentOn = false;
         pView.setVisibility(TextView.INVISIBLE);
+        myReveal.setBackgroundColor(Color.TRANSPARENT);
         //android.support.v7.app.ActionBar bar = getSupportActionBar();
         //bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33B5E5")));
 
@@ -134,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         if(loadAngle().equals("rad")){
             angleB.setText("RAD");
             angle = false;
@@ -145,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             angle = true;
         }
 
-
+        //Load theme - Not a seperate function because the compilation crashes?
         String themeNumber = loadTheme();
         if(themeNumber.equals("0")){
             myLayout.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
@@ -205,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         else if(themeNumber.equals("2")){
+            mvv.setBackgroundColor(getResources().getColor(R.color.purple));
             myLayout.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
             myLinear.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
             zeroB.setTextColor(getResources().getColor(R.color.fuschia));
@@ -296,7 +301,8 @@ public class MainActivity extends AppCompatActivity {
                             arrayAdapter.add("Stealth Black");
                             arrayAdapter.add("Minimal White");
                             arrayAdapter.add("Fuschia");
-                            arrayAdapter.add("Ready Red");
+                            arrayAdapter.add("Tropical Blue");
+                            arrayAdapter.add("Forrest Green");
 
 
                             builderSingle.setNeutralButton("ok", new DialogInterface.OnClickListener() {
@@ -313,6 +319,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(MainActivity.this, strName, Toast.LENGTH_SHORT).show();
 
                                     if(which == 0){
+                                        //Stealth Black
                                         myLayout.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
                                         myLinear.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
                                         zeroB.setTextColor(Color.WHITE);
@@ -336,6 +343,9 @@ public class MainActivity extends AppCompatActivity {
                                         bracketB.setTextColor(getResources().getColor(R.color.grayC));
                                         sqrtB.setTextColor(getResources().getColor(R.color.grayC));
                                         lnB.setTextColor(getResources().getColor(R.color.grayC));
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.equalsButtonOriginal));
+                                        }
                                         saveTheme("0");
 
 
@@ -343,6 +353,8 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                     else if(which == 1){
+                                        //Minimal White
+                                        mvv.setBackgroundColor(getResources().getColor(R.color.smallTextColor));
                                         myLayout.setBackgroundColor(Color.WHITE);
                                         myLinear.setBackgroundColor(Color.WHITE);
                                         zeroB.setTextColor(Color.BLACK);
@@ -366,10 +378,15 @@ public class MainActivity extends AppCompatActivity {
                                         sqrtB.setTextColor(getResources().getColor(R.color.grayC));
                                         lnB.setTextColor(getResources().getColor(R.color.grayC));
                                         bracketB.setTextColor(getResources().getColor(R.color.grayC));
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.smallTextColor));
+                                        }
                                         saveTheme("1");
                                     }
 
                                     else if(which == 2){
+                                        //Fuschia
+                                        mvv.setBackgroundColor(getResources().getColor(R.color.fuschiaPink));
                                         myLayout.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
                                         myLinear.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
                                         zeroB.setTextColor(getResources().getColor(R.color.fuschia));
@@ -393,24 +410,30 @@ public class MainActivity extends AppCompatActivity {
                                         binButton.setTextColor(getResources().getColor(R.color.purple));
                                         exponentB.setTextColor(getResources().getColor(R.color.purple));
                                         bracketB.setTextColor(getResources().getColor(R.color.purple));
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.equalsButtonOriginal));
+                                        }
                                         saveTheme("2");
                                     }
 
                                     else if(which == 3){
-                                        myLayout.setBackgroundColor(Color.BLACK);
-                                        myLinear.setBackgroundColor(Color.BLACK);
-                                        zeroB.setTextColor(getResources().getColor(R.color.cream));
-                                        oneB.setTextColor(getResources().getColor(R.color.cream));
-                                        twoB.setTextColor(getResources().getColor(R.color.cream));
-                                        threeB.setTextColor(getResources().getColor(R.color.cream));
-                                        fourB.setTextColor(getResources().getColor(R.color.cream));
-                                        fiveB.setTextColor(getResources().getColor(R.color.cream));
-                                        sixB.setTextColor(getResources().getColor(R.color.cream));
-                                        sevenB.setTextColor(getResources().getColor(R.color.cream));
-                                        eightB.setTextColor(getResources().getColor(R.color.cream));
-                                        nineB.setTextColor(getResources().getColor(R.color.cream));
-                                        decimalB.setTextColor(getResources().getColor(R.color.cream));
-                                        ansB.setTextColor(getResources().getColor(R.color.cream));
+                                        //Ocean Blue
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                                            mvv.setBackgroundColor(getResources().getColor(R.color.lightbluee2));
+                                        myLayout.setBackgroundColor(getResources().getColor(R.color.lightbluee));
+                                        myLinear.setBackgroundColor(getResources().getColor(R.color.lightbluee));
+                                        zeroB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        oneB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        twoB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        threeB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        fourB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        fiveB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        sixB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        sevenB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        eightB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        nineB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        decimalB.setTextColor(getResources().getColor(R.color.oceanBlue));
+                                        ansB.setTextColor(getResources().getColor(R.color.oceanBlue));
                                         logB.setTextColor(getResources().getColor(R.color.purple));
                                         lnB.setTextColor(getResources().getColor(R.color.purple));
                                         sqrtB.setTextColor(getResources().getColor(R.color.purple));
@@ -420,7 +443,46 @@ public class MainActivity extends AppCompatActivity {
                                         binButton.setTextColor(getResources().getColor(R.color.purple));
                                         exponentB.setTextColor(getResources().getColor(R.color.purple));
                                         bracketB.setTextColor(getResources().getColor(R.color.purple));
+                                        equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.smallTextColor));
+
                                         saveTheme("3");
+                                        }
+                                        else {
+                                            Toast.makeText(MainActivity.this, "Sorry, this theme requires Android 5.0 Lollipop or greater", Toast.LENGTH_LONG).show();
+                                        }
+
+                                    }
+
+                                    else if(which == 4){
+                                        //gree
+                                        mvv.setBackgroundColor(getResources().getColor(R.color.clearView2));
+                                        myLayout.setBackgroundColor(getResources().getColor(R.color.clearView2));
+                                        myLinear.setBackgroundColor(getResources().getColor(R.color.clearView2));
+                                        zeroB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        oneB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        twoB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        threeB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        fourB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        fiveB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        sixB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        sevenB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        eightB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        nineB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        decimalB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        ansB.setTextColor(getResources().getColor(R.color.clearView3));
+                                        logB.setTextColor(getResources().getColor(R.color.purple));
+                                        lnB.setTextColor(getResources().getColor(R.color.purple));
+                                        sqrtB.setTextColor(getResources().getColor(R.color.purple));
+                                        sinB.setTextColor(getResources().getColor(R.color.purple));
+                                        cosB.setTextColor(getResources().getColor(R.color.purple));
+                                        tanB.setTextColor(getResources().getColor(R.color.purple));
+                                        binButton.setTextColor(getResources().getColor(R.color.purple));
+                                        exponentB.setTextColor(getResources().getColor(R.color.purple));
+                                        bracketB.setTextColor(getResources().getColor(R.color.purple));
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, R.color.equalsButtonOriginal));
+                                        }
+                                        saveTheme("2");
                                     }
                                 }
                             });

@@ -9,9 +9,14 @@
     <color name="cream">#fffafa</color>
     <color name="cream2">#eee9e9</color>
     <color name="lightbluee">#95efff</color>
+    <color name="lightbluee2">#bcadf3ff</color>
     <color name="alisColor">#c6fc3737</color>
     <color name="alisColor2">#6d7d94</color>
     <color name="clearView">#a299cc00</color>
+    <color name="clearView2">#a2e5ff98</color>
+    <color name="clearView3">#c44a9900</color>
+
+
     <color name="naturalTeal">#009688</color>
     <color name="naturalBlack">#263238</color>
     <color name="smallTextColor">#63bfe1</color>
@@ -21,5 +26,10 @@
     <color name="grayC">#aaa</color>
     <color name="backgroundFuschia">#F0E6EF</color>
     <color name="tractorRed">#F71735</color>
+    <color name="oceanBlue">#1282A2</color>
+    <color name="darkBlue">#034078</color>
+    <color name="oxfordBlue">#001F54</color>
+    <color name="fuschiaPink">#b8ffa1ff</color>
+    <color name="equalsButtonOriginal">#FFDF586F</color>
 
 </resources>

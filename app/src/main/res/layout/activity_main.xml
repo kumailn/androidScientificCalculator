@@ -23,6 +23,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
 
+    <Button
+        android:id="@+id/popupButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_shortcut_more_vert"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="363dp" />
+
     <TextView
         android:id="@+id/calcView"
         android:layout_width="0dp"
@@ -45,32 +56,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4" />
 
-    <Button
-        android:id="@+id/popupButton"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+    <TextView
+        android:id="@+id/instantCalcluationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_shortcut_more_vert"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="35dp"
+        android:gravity="bottom"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="363dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <io.codetail.widget.RevealFrameLayout
         android:id="@+id/revealFrameLayout"
         android:layout_width="500dp"
         android:layout_height="500dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="-8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintVertical_bias="1.0">
 
         <!-- Put more views here if you want, it's stock frame layout  -->
@@ -567,6 +586,7 @@
                 android:layout_row="1"
                 android:layout_weight="1"
                 android:backgroundTint="@color/colorAccent"
+                android:paddingBottom="15dp"
                 android:text="="
                 android:textColor="@android:color/white"
                 android:textSize="35sp"
@@ -752,25 +772,6 @@
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/instantCalcluationView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="70dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="35dp"
-        android:gravity="bottom"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
 
