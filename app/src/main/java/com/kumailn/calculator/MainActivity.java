@@ -90,16 +90,16 @@ public class MainActivity extends AppCompatActivity {
         final Button divB = (Button)findViewById(R.id.divideButton);
         Button equalsB = (Button)findViewById(R.id.equalsButton);
         final Button plusB = (Button)findViewById(R.id.plusButton);
-        Button sinB = (Button)findViewById(R.id.sinButton);
+        final Button sinB = (Button)findViewById(R.id.sinButton);
         final Button tanB = (Button)findViewById(R.id.tanButton);
-        Button cosB = (Button)findViewById(R.id.cosButton);
+        final Button cosB = (Button)findViewById(R.id.cosButton);
         Button delB = (Button)findViewById(R.id.deleteButton);
         Button clrB = (Button)findViewById(R.id.clearButton);
-        Button bracketB = (Button) findViewById(R.id.bracketButton);
-        Button logB = (Button)findViewById(R.id.logButton);
-        Button lnB = (Button)findViewById(R.id.lnButton);
-        Button binButton = (Button)findViewById(R.id.bbb);
-        Button sqrtB = (Button)findViewById(R.id.sqrtButton);
+        final Button bracketB = (Button) findViewById(R.id.bracketButton);
+        final Button logB = (Button)findViewById(R.id.logButton);
+        final Button lnB = (Button)findViewById(R.id.lnButton);
+        final Button binButton = (Button)findViewById(R.id.bbb);
+        final Button sqrtB = (Button)findViewById(R.id.sqrtButton);
         final Button popupB = (Button)findViewById(R.id.popupButton);
         final TextView calculationView = (TextView)findViewById(R.id.instantCalcluationView);
         final TextView pView = (TextView)findViewById(R.id.primeView);
@@ -145,6 +145,127 @@ public class MainActivity extends AppCompatActivity {
             angle = true;
         }
 
+
+        String themeNumber = loadTheme();
+        if(themeNumber.equals("0")){
+            myLayout.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
+            myLinear.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
+            zeroB.setTextColor(Color.WHITE);
+            oneB.setTextColor(Color.WHITE);
+            twoB.setTextColor(Color.WHITE);
+            threeB.setTextColor(Color.WHITE);
+            fourB.setTextColor(Color.WHITE);
+            fiveB.setTextColor(Color.WHITE);
+            sixB.setTextColor(Color.WHITE);
+            sevenB.setTextColor(Color.WHITE);
+            eightB.setTextColor(Color.WHITE);
+            nineB.setTextColor(Color.WHITE);
+            decimalB.setTextColor(Color.WHITE);
+            ansB.setTextColor(Color.WHITE);
+            logB.setTextColor(getResources().getColor(R.color.grayC));
+            sinB.setTextColor(getResources().getColor(R.color.grayC));
+            cosB.setTextColor(getResources().getColor(R.color.grayC));
+            tanB.setTextColor(getResources().getColor(R.color.grayC));
+            binButton.setTextColor(getResources().getColor(R.color.grayC));
+            exponentB.setTextColor(getResources().getColor(R.color.grayC));
+            bracketB.setTextColor(getResources().getColor(R.color.grayC));
+            sqrtB.setTextColor(getResources().getColor(R.color.grayC));
+            lnB.setTextColor(getResources().getColor(R.color.grayC));
+            saveTheme("0");
+
+
+
+
+        }
+        else if(themeNumber.equals("1")){
+            myLayout.setBackgroundColor(Color.WHITE);
+            myLinear.setBackgroundColor(Color.WHITE);
+            zeroB.setTextColor(Color.BLACK);
+            oneB.setTextColor(Color.BLACK);
+            twoB.setTextColor(Color.BLACK);
+            threeB.setTextColor(Color.BLACK);
+            fourB.setTextColor(Color.BLACK);
+            fiveB.setTextColor(Color.BLACK);
+            sixB.setTextColor(Color.BLACK);
+            sevenB.setTextColor(Color.BLACK);
+            eightB.setTextColor(Color.BLACK);
+            nineB.setTextColor(Color.BLACK);
+            decimalB.setTextColor(Color.BLACK);
+            ansB.setTextColor(Color.BLACK);
+            logB.setTextColor(getResources().getColor(R.color.grayC));
+            sinB.setTextColor(getResources().getColor(R.color.grayC));
+            cosB.setTextColor(getResources().getColor(R.color.grayC));
+            tanB.setTextColor(getResources().getColor(R.color.grayC));
+            binButton.setTextColor(getResources().getColor(R.color.grayC));
+            exponentB.setTextColor(getResources().getColor(R.color.grayC));
+            sqrtB.setTextColor(getResources().getColor(R.color.grayC));
+            lnB.setTextColor(getResources().getColor(R.color.grayC));
+            bracketB.setTextColor(getResources().getColor(R.color.grayC));
+            saveTheme("1");
+        }
+
+        else if(themeNumber.equals("2")){
+            myLayout.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
+            myLinear.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
+            zeroB.setTextColor(getResources().getColor(R.color.fuschia));
+            oneB.setTextColor(getResources().getColor(R.color.fuschia));
+            twoB.setTextColor(getResources().getColor(R.color.fuschia));
+            threeB.setTextColor(getResources().getColor(R.color.fuschia));
+            fourB.setTextColor(getResources().getColor(R.color.fuschia));
+            fiveB.setTextColor(getResources().getColor(R.color.fuschia));
+            sixB.setTextColor(getResources().getColor(R.color.fuschia));
+            sevenB.setTextColor(getResources().getColor(R.color.fuschia));
+            eightB.setTextColor(getResources().getColor(R.color.fuschia));
+            nineB.setTextColor(getResources().getColor(R.color.fuschia));
+            decimalB.setTextColor(getResources().getColor(R.color.fuschia));
+            ansB.setTextColor(getResources().getColor(R.color.fuschia));
+            logB.setTextColor(getResources().getColor(R.color.purple));
+            lnB.setTextColor(getResources().getColor(R.color.purple));
+            sqrtB.setTextColor(getResources().getColor(R.color.purple));
+            sinB.setTextColor(getResources().getColor(R.color.purple));
+            cosB.setTextColor(getResources().getColor(R.color.purple));
+            tanB.setTextColor(getResources().getColor(R.color.purple));
+            binButton.setTextColor(getResources().getColor(R.color.purple));
+            exponentB.setTextColor(getResources().getColor(R.color.purple));
+            bracketB.setTextColor(getResources().getColor(R.color.purple));
+            saveTheme("2");
+        }
+
+        else if(themeNumber.equals("3")){
+            myLayout.setBackgroundColor(Color.BLACK);
+            myLinear.setBackgroundColor(Color.BLACK);
+            zeroB.setTextColor(getResources().getColor(R.color.cream));
+            oneB.setTextColor(getResources().getColor(R.color.cream));
+            twoB.setTextColor(getResources().getColor(R.color.cream));
+            threeB.setTextColor(getResources().getColor(R.color.cream));
+            fourB.setTextColor(getResources().getColor(R.color.cream));
+            fiveB.setTextColor(getResources().getColor(R.color.cream));
+            sixB.setTextColor(getResources().getColor(R.color.cream));
+            sevenB.setTextColor(getResources().getColor(R.color.cream));
+            eightB.setTextColor(getResources().getColor(R.color.cream));
+            nineB.setTextColor(getResources().getColor(R.color.cream));
+            decimalB.setTextColor(getResources().getColor(R.color.cream));
+            ansB.setTextColor(getResources().getColor(R.color.cream));
+            logB.setTextColor(getResources().getColor(R.color.purple));
+            lnB.setTextColor(getResources().getColor(R.color.purple));
+            sqrtB.setTextColor(getResources().getColor(R.color.purple));
+            sinB.setTextColor(getResources().getColor(R.color.purple));
+            cosB.setTextColor(getResources().getColor(R.color.purple));
+            tanB.setTextColor(getResources().getColor(R.color.purple));
+            binButton.setTextColor(getResources().getColor(R.color.purple));
+            exponentB.setTextColor(getResources().getColor(R.color.purple));
+            bracketB.setTextColor(getResources().getColor(R.color.purple));
+            saveTheme("3");
+        }
+
+
+
+
+
+
+
+
+
         sqrtB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,9 +292,11 @@ public class MainActivity extends AppCompatActivity {
                             AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
                             builderSingle.setTitle("Set a theme:");
 
-                            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_singlechoice);
+                            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.select_dialog_item);
                             arrayAdapter.add("Stealth Black");
                             arrayAdapter.add("Minimal White");
+                            arrayAdapter.add("Fuschia");
+                            arrayAdapter.add("Ready Red");
 
 
                             builderSingle.setNeutralButton("ok", new DialogInterface.OnClickListener() {
@@ -204,6 +327,16 @@ public class MainActivity extends AppCompatActivity {
                                         nineB.setTextColor(Color.WHITE);
                                         decimalB.setTextColor(Color.WHITE);
                                         ansB.setTextColor(Color.WHITE);
+                                        logB.setTextColor(getResources().getColor(R.color.grayC));
+                                        sinB.setTextColor(getResources().getColor(R.color.grayC));
+                                        cosB.setTextColor(getResources().getColor(R.color.grayC));
+                                        tanB.setTextColor(getResources().getColor(R.color.grayC));
+                                        binButton.setTextColor(getResources().getColor(R.color.grayC));
+                                        exponentB.setTextColor(getResources().getColor(R.color.grayC));
+                                        bracketB.setTextColor(getResources().getColor(R.color.grayC));
+                                        sqrtB.setTextColor(getResources().getColor(R.color.grayC));
+                                        lnB.setTextColor(getResources().getColor(R.color.grayC));
+                                        saveTheme("0");
 
 
 
@@ -224,6 +357,70 @@ public class MainActivity extends AppCompatActivity {
                                         nineB.setTextColor(Color.BLACK);
                                         decimalB.setTextColor(Color.BLACK);
                                         ansB.setTextColor(Color.BLACK);
+                                        logB.setTextColor(getResources().getColor(R.color.grayC));
+                                        sinB.setTextColor(getResources().getColor(R.color.grayC));
+                                        cosB.setTextColor(getResources().getColor(R.color.grayC));
+                                        tanB.setTextColor(getResources().getColor(R.color.grayC));
+                                        binButton.setTextColor(getResources().getColor(R.color.grayC));
+                                        exponentB.setTextColor(getResources().getColor(R.color.grayC));
+                                        sqrtB.setTextColor(getResources().getColor(R.color.grayC));
+                                        lnB.setTextColor(getResources().getColor(R.color.grayC));
+                                        bracketB.setTextColor(getResources().getColor(R.color.grayC));
+                                        saveTheme("1");
+                                    }
+
+                                    else if(which == 2){
+                                        myLayout.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
+                                        myLinear.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
+                                        zeroB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        oneB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        twoB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        threeB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        fourB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        fiveB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        sixB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        sevenB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        eightB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        nineB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        decimalB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        ansB.setTextColor(getResources().getColor(R.color.fuschia));
+                                        logB.setTextColor(getResources().getColor(R.color.purple));
+                                        lnB.setTextColor(getResources().getColor(R.color.purple));
+                                        sqrtB.setTextColor(getResources().getColor(R.color.purple));
+                                        sinB.setTextColor(getResources().getColor(R.color.purple));
+                                        cosB.setTextColor(getResources().getColor(R.color.purple));
+                                        tanB.setTextColor(getResources().getColor(R.color.purple));
+                                        binButton.setTextColor(getResources().getColor(R.color.purple));
+                                        exponentB.setTextColor(getResources().getColor(R.color.purple));
+                                        bracketB.setTextColor(getResources().getColor(R.color.purple));
+                                        saveTheme("2");
+                                    }
+
+                                    else if(which == 3){
+                                        myLayout.setBackgroundColor(Color.BLACK);
+                                        myLinear.setBackgroundColor(Color.BLACK);
+                                        zeroB.setTextColor(getResources().getColor(R.color.cream));
+                                        oneB.setTextColor(getResources().getColor(R.color.cream));
+                                        twoB.setTextColor(getResources().getColor(R.color.cream));
+                                        threeB.setTextColor(getResources().getColor(R.color.cream));
+                                        fourB.setTextColor(getResources().getColor(R.color.cream));
+                                        fiveB.setTextColor(getResources().getColor(R.color.cream));
+                                        sixB.setTextColor(getResources().getColor(R.color.cream));
+                                        sevenB.setTextColor(getResources().getColor(R.color.cream));
+                                        eightB.setTextColor(getResources().getColor(R.color.cream));
+                                        nineB.setTextColor(getResources().getColor(R.color.cream));
+                                        decimalB.setTextColor(getResources().getColor(R.color.cream));
+                                        ansB.setTextColor(getResources().getColor(R.color.cream));
+                                        logB.setTextColor(getResources().getColor(R.color.purple));
+                                        lnB.setTextColor(getResources().getColor(R.color.purple));
+                                        sqrtB.setTextColor(getResources().getColor(R.color.purple));
+                                        sinB.setTextColor(getResources().getColor(R.color.purple));
+                                        cosB.setTextColor(getResources().getColor(R.color.purple));
+                                        tanB.setTextColor(getResources().getColor(R.color.purple));
+                                        binButton.setTextColor(getResources().getColor(R.color.purple));
+                                        exponentB.setTextColor(getResources().getColor(R.color.purple));
+                                        bracketB.setTextColor(getResources().getColor(R.color.purple));
+                                        saveTheme("3");
                                     }
                                 }
                             });

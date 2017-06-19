@@ -16,5 +16,10 @@
     <color name="naturalBlack">#263238</color>
     <color name="smallTextColor">#63bfe1</color>
     <color name="myGray">#aaa</color>
+    <color name="fuschia">#E83F6F</color>
+    <color name="purple">#9C89B8</color>
+    <color name="grayC">#aaa</color>
+    <color name="backgroundFuschia">#F0E6EF</color>
+    <color name="tractorRed">#F71735</color>
 
 </resources>
