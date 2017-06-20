@@ -21,6 +21,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.InputType;
+import android.text.Layout;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
@@ -42,6 +43,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
@@ -623,6 +625,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -633,6 +636,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "%";
                 calculationView.setText(displayCalculation);
                 equalsMethod();
+                onAllClicks();
                 return true;
             }
         });
@@ -650,6 +654,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -664,6 +669,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -678,6 +684,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
 
             }
         });
@@ -693,6 +700,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -717,6 +725,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -913,6 +922,7 @@ public class MainActivity extends AppCompatActivity {
                     displayCalculation += "arctan(";
                     calculationView.setText(displayCalculation);
                     equalsMethod();
+                    onAllClicks();
                     return true;
                 }
                 else{
@@ -920,6 +930,7 @@ public class MainActivity extends AppCompatActivity {
                     displayCalculation += "arctan(";
                     calculationView.setText(displayCalculation);
                     equalsMethod();
+                    onAllClicks();
                     return true;
                 }
             }
@@ -956,6 +967,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
+                onAllClicks();
                 equalsMethod();
             }
         });
@@ -972,6 +984,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -1011,6 +1024,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -1021,6 +1035,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "C(";
                 calculationView.setText(displayCalculation);
                 equalsMethod();
+                onAllClicks();
                 return true;
 
             }
@@ -1037,6 +1052,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(80);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -1047,6 +1063,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += ",";
                 calculationView.setText(displayCalculation);
                 equalsMethod();
+                onAllClicks();
                 return true;
             }
         });
@@ -1441,6 +1458,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
+
+    }
+
+    public void onAllClicks(){
+        TextView instantC = (TextView)findViewById(R.id.instantCalcluationView);
+        HorizontalScrollView mSV = (HorizontalScrollView)findViewById(R.id.myScrollView);
+        Layout layout = instantC.getLayout();
+        mSV.smoothScrollTo(mSV.getRight(), 0);
 
 
 

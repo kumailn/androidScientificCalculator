@@ -57,16 +57,17 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <HorizontalScrollView
-        android:overScrollMode="never"
-        android:scrollbars="none"
+        android:id="@+id/myScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent">>
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">>
 
         <TextView
             android:id="@+id/instantCalcluationView"
@@ -79,7 +80,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
             android:gravity="bottom"
-            android:paddingRight="15dp"
+            android:paddingRight="25dp"
             android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintHorizontal_bias="0.0"
