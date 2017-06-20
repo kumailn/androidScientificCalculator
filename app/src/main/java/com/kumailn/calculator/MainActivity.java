@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
                 currentCalculation += "sqrt(";
                 displayCalculation += "√(";
                 calculationView.setText(displayCalculation);
-
+                onAllClicks();
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
             }
@@ -546,6 +546,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
 
 
                 //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_right));
@@ -559,6 +560,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "!";
                 calculationView.setText(displayCalculation);
                 equalsMethod();
+                onAllClicks();
                 return true;
             }
         });
@@ -574,6 +576,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
 
             }
         });
@@ -585,6 +588,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "e";
                 calculationView.setText(displayCalculation);
                 equalsMethod();
+                onAllClicks();
                 return true;
             }
         });
@@ -600,6 +604,7 @@ public class MainActivity extends AppCompatActivity {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                 vv.vibrate(50);
                 equalsMethod();
+                onAllClicks();
             }
         });
 
@@ -610,6 +615,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "φ";
                 calculationView.setText(displayCalculation);
                 equalsMethod();
+                onAllClicks();
                 return true;
             }
         });
@@ -1133,6 +1139,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 equalsMethod();
+                onAllClicks();
 
             }
         });
@@ -1209,6 +1216,7 @@ public class MainActivity extends AppCompatActivity {
                     //exponentB.setTextColor(getResources().getColor(R.color.black));
                 }
                 instantCalcView.setText("");
+                scrollOnClear();
                 //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_in_left));
 
                 //calculationView.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.slide_out_right));
@@ -1469,9 +1477,17 @@ public class MainActivity extends AppCompatActivity {
         Layout layout = instantC.getLayout();
         mSV.smoothScrollTo(mSV.getRight(), 0);
 
+    }
 
+
+    public void scrollOnClear(){
+        TextView instantC = (TextView)findViewById(R.id.instantCalcluationView);
+        HorizontalScrollView mSV = (HorizontalScrollView)findViewById(R.id.myScrollView);
+        Layout layout = instantC.getLayout();
+        mSV.smoothScrollTo(-1000, 0);
 
     }
+
 
     public void equalsMethod(){
         TextView calculationView = (TextView)findViewById(R.id.calcView);
@@ -1565,41 +1581,6 @@ public class MainActivity extends AppCompatActivity {
         //currentCalculation = result;
     }
 
-
-
-/*    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Inflates menu
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_about){
-            AlertDialog.Builder builder;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                builder = new AlertDialog.Builder(MainActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-            } else {
-                builder = new AlertDialog.Builder(MainActivity.this);
-            }
-            builder.setTitle("About the app")
-                    .setMessage("Made by Kumail Naqvi, 2017, Version 1.0, Contact me at kumailmn@gmail.com, github.com/kumailn")
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // continue with delete
-                        }
-
-                    })
-                    //.setIcon(android.R.drawable.ic_dialog_alert)
-                    .show();
-        }
-        if(item.getItemId() == R.id.action_settings){
-            //Intent i = new Intent(this, SettingsActivity.class);
-            //startActivity(i);
-            Toast.makeText(MainActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);    }*/
 
 
     public void saveTheme(String meth){
