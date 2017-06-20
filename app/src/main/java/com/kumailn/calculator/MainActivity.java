@@ -1348,6 +1348,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
+
                 //instantCalcView.setText(" " + result);
                 if(result.equals("Error")){
                     instantCalcView.setText(" " + result);
@@ -1359,6 +1360,8 @@ public class MainActivity extends AppCompatActivity {
                     displayCalculation = (" " + "Ans");
                     currentCalculation = result;
                 }
+
+
 
 
 
@@ -1523,6 +1526,13 @@ public class MainActivity extends AppCompatActivity {
             }
             pView.setText(result2);
             pView.setVisibility(TextView.VISIBLE);
+        }
+
+        if(calculationView.getText().length() > 17){
+            calculationView.setTextSize(30);
+        }
+        else{
+            calculationView.setTextSize(34);
         }
         //displayCalculation = " " + result;
         //currentCalculation = result;
