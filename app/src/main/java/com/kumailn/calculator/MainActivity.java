@@ -1438,16 +1438,18 @@ public class MainActivity extends AppCompatActivity {
                     pVisible = false;
                 }
 
-                if(!(result.equals("NaN"))){
+                if(!(result.equals("NaN") && !(result.equals("∞")))){
                     previousAns = result;
                     saveAnswer(result);
                 }
-                else{
+                else if (result.equals("NaN")){
                     result = "Error";
                     //result = "";
-
-
                 }
+                else if (result.equals("∞")){
+                    result = "∞";
+                }
+
 
                 //instantCalcView.setText(" " + result);
                 if(result.equals("Error")){
