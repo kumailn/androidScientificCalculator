@@ -376,7 +376,7 @@ public class MainActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     String strName = arrayAdapter.getItem(which);
-                                    Toast.makeText(MainActivity.this, strName, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(MainActivity.this, strName, Toast.LENGTH_SHORT).show();
 
                                     if(which == 0){
                                         //Stealth Black
@@ -1434,8 +1434,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if (pVisible == true){
-                    pView.setVisibility(View.INVISIBLE);
-                    pVisible = false;
+                    //pView.setVisibility(View.INVISIBLE);
+                    //pVisible = false;
                 }
 
                 if(!(result.equals("NaN") && !(result.equals("∞")))){
@@ -1638,7 +1638,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //
         if(pVisible == true){
-            Expression ex = new Expression("ispr(" + instantCalcView.getText()  + ")");
+            Expression ex = new Expression("ispr(" + calculationView.getText()  + ")");
             String result2 = String.valueOf(ex.calculate());
             if(result2.equals("0.0")){
                 result2 = "false";
