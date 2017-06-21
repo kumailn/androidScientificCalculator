@@ -129,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
         //android.support.v7.app.ActionBar bar = getSupportActionBar();
         //bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#33B5E5")));
 
+        try{
+            previousAns = loadAnswer();
+        }
+        catch(Exception ff){
+
+        }
+
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
        /* Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -1433,6 +1440,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(!(result.equals("NaN"))){
                     previousAns = result;
+                    saveAnswer(result);
                 }
                 else{
                     result = "Error";
@@ -1651,6 +1659,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    public void saveAnswer(String meth){
+        //Local data storage
+        SharedPreferences sharedPreferences = getSharedPreferences("myData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("answer", meth);
+        editor.commit();
+    }
+
+    public String loadAnswer(){
+        SharedPreferences sharedPreferences = getSharedPreferences("myData", Context.MODE_PRIVATE);
+        String myMethod = sharedPreferences.getString("answer", defaultMethod);
+        return (myMethod);
+    }
 
     public void saveTheme(String meth){
         //Local data storage
