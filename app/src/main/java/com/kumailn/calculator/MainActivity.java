@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public static Boolean exponentOn;
     public static Boolean firstExponent;
     public static Boolean pVisible;
+    public static Boolean binPressed;
     //False == rad, true == deg
     public static Boolean angle;
     public static final String defaultMethod = "rad";
@@ -352,7 +353,7 @@ public class MainActivity extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals("Settings")){
+                        if(item.getTitle().equals("Customize")){
                             //Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
                             builderSingle.setTitle("Set a theme:");
@@ -548,6 +549,9 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
                             builderSingle.show();
+                        }
+                        else if(item.getTitle().equals("Customize")){
+
                         }
                         else{
                             AlertDialog.Builder builder;
@@ -1405,10 +1409,10 @@ public class MainActivity extends AppCompatActivity {
                 //Log.e("backgroundC", currentCalculation);
                 //Log.e("displayC", displayCalculation);
 
-                if(currentCalculation.contains("pi")){
+/*                if(currentCalculation.contains("pi")){
                     String xx = currentCalculation;
                     xx = xx.substring(0, 4) + "." + xx.substring(4, xx.length());
-                }
+                }*/
 
                 Expression e = new Expression(currentCalculation);
                 String result = String.valueOf(e.calculate());
@@ -1462,7 +1466,7 @@ public class MainActivity extends AppCompatActivity {
                     displayCalculation = (" " + "Ans");
                     currentCalculation = result;
                 }
-
+                binPressed = false;
                 scrollOnClear();
 
 
@@ -1476,6 +1480,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //String newR = previousAns.replaceAll("\\s+","");;
+                if(binPressed == true){
+                    return;
+                }
                 String ccv = String.valueOf(instantCalcView.getText());
                 Log.e("INBIN", ccv);
                 try{
@@ -1485,6 +1492,8 @@ public class MainActivity extends AppCompatActivity {
                     //equalsMethod();
                 }
                 catch (Exception e){}
+                binPressed = true;
+
             }
 
         });
@@ -1493,6 +1502,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 //String newR = previousAns.replaceAll("\\s+","");
+                if(binPressed == true){
+                    return true;
+                }
                 String ccv = String.valueOf(instantCalcView.getText());
                 try{
                     ccv = ccv.replaceAll("\\s+","");;
@@ -1501,6 +1513,7 @@ public class MainActivity extends AppCompatActivity {
                     //equalsMethod();
                 }
                 catch (Exception e){}
+                binPressed = true;
                 return true;
             }
         });
@@ -1508,8 +1521,12 @@ public class MainActivity extends AppCompatActivity {
         equalsB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Rational fraction = new Rational(Double.valueOf(previousAns));
-                calculationView.setText(" " + fraction.simple());
+                try {
+                    Rational fraction = new Rational(Double.valueOf(String.valueOf(instantCalcView.getText())));
+                    instantCalcView.setText(" " + fraction.simple());
+                } catch (Exception ea) {
+                    ea.printStackTrace();
+                }
                 return true;
             }
         });
@@ -1598,10 +1615,12 @@ public class MainActivity extends AppCompatActivity {
         Log.e("backgroundC", currentCalculation);
         Log.e("displayC", displayCalculation);
 
+/*
         if(currentCalculation.contains("pi")){
             String xx = currentCalculation;
             xx = xx.substring(0, 4) + "." + xx.substring(4, xx.length());
         }
+*/
 
         Expression e = new Expression(currentCalculation);
         String result = String.valueOf(e.calculate());
@@ -1656,6 +1675,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             calculationView.setTextSize(34);
         }
+        binPressed = false;
         //displayCalculation = " " + result;
         //currentCalculation = result;
     }
