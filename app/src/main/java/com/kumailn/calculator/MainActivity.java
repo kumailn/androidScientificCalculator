@@ -1416,6 +1416,10 @@ public class MainActivity extends AppCompatActivity {
 
                 Expression e = new Expression(currentCalculation);
                 String result = String.valueOf(e.calculate());
+                if (result.equals("NaN")){
+                    e = new Expression(currentCalculation + ")");
+                    result = String.valueOf(e.calculate());
+                }
                 if(result.endsWith("E-16") || result.endsWith("E-15") || result.endsWith("E-14")){
                     result = "0";
                 }
@@ -1624,6 +1628,10 @@ public class MainActivity extends AppCompatActivity {
 
         Expression e = new Expression(currentCalculation);
         String result = String.valueOf(e.calculate());
+        if (result.equals("NaN")){
+            e = new Expression(currentCalculation + ")");
+            result = String.valueOf(e.calculate());
+        }
         if(result.endsWith("E-16") || result.endsWith("E-15") || result.endsWith("E-14")){
             result = "0";
         }
