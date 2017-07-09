@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -115,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         final ConstraintLayout myLayout = (ConstraintLayout)findViewById(R.id.myBackLayout);
         final RevealFrameLayout myReveal = (RevealFrameLayout)findViewById(R.id.revealFrameLayout);
         final View mvv = findViewById(R.id.awesome_card);
+
+        final String versionName = BuildConfig.VERSION_NAME;
 
         //instantCalcView
 
@@ -550,7 +553,7 @@ public class MainActivity extends AppCompatActivity {
                             });
                             builderSingle.show();
                         }
-                        else if(item.getTitle().equals("Customize")){
+                        else if(item.getTitle().equals("Settings")){
 
                         }
                         else{
@@ -561,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
                                 builder = new AlertDialog.Builder(MainActivity.this);
                             }
 
-                            String nodata="<br/>&#8226; Version 1.5<br/>&#8226; Made by Kumail Naqvi, 2017<br/>&#8226; kumailmn@gmail.com<br/>&#8226; github.com/kumailn<br/>&#8226; powered by mXparser";
+                            String nodata="<br/>&#8226; Version " + versionName + "<br/>&#8226; Made by Kumail Naqvi, 2017<br/>&#8226; kumailmn@gmail.com<br/>&#8226; github.com/kumailn<br/>&#8226; powered by mXparser";
                             final SpannableString ss = new SpannableString(Html.fromHtml(nodata));
                             Linkify.addLinks(ss, Linkify.ALL);
 
