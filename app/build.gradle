@@ -7,9 +7,9 @@ android {
         applicationId "com.kumailn.calculator"
         minSdkVersion 15
         targetSdkVersion 25
-        versionName '1.5.1'
+        versionName '1.5.5'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 5
+        versionCode 6
     }
     buildTypes {
         release {

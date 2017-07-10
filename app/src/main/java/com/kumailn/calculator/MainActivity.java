@@ -1632,8 +1632,13 @@ public class MainActivity extends AppCompatActivity {
         Expression e = new Expression(currentCalculation);
         String result = String.valueOf(e.calculate());
         if (result.equals("NaN")){
-            e = new Expression(currentCalculation + ")");
-            result = String.valueOf(e.calculate());
+            if(currentCalculation.contains("+.")) {
+                for (int i = -1; (i = currentCalculation.indexOf("+.", i + 1)) != -1; ) {
+                    currentCalculation = currentCalculation.substring(0, i) + "0" + currentCalculation.substring(i, currentCalculation.length());
+                }
+                e = new Expression(currentCalculation + ")");
+                result = String.valueOf(e.calculate());
+            }
         }
         if(result.endsWith("E-16") || result.endsWith("E-15") || result.endsWith("E-14")){
             result = "0";
