@@ -1628,17 +1628,23 @@ public class MainActivity extends AppCompatActivity {
             xx = xx.substring(0, 4) + "." + xx.substring(4, xx.length());
         }
 */
+        if(currentCalculation.contains("+.")) {
+            Log.e("DECIMAL","DETECTED");
+            for(int i = 0; i < currentCalculation.length(); i++){
+                if(currentCalculation.substring(i, i+1).equals("+.")){
+                    currentCalculation = currentCalculation.substring(0, i) + "0" + currentCalculation.substring(i, currentCalculation.length());
+                    Log.e(currentCalculation, "DECIMAL");
 
+                }
+            }
+
+        }
         Expression e = new Expression(currentCalculation);
         String result = String.valueOf(e.calculate());
         if (result.equals("NaN")){
-            if(currentCalculation.contains("+.")) {
-                for (int i = -1; (i = currentCalculation.indexOf("+.", i + 1)) != -1; ) {
-                    currentCalculation = currentCalculation.substring(0, i) + "0" + currentCalculation.substring(i, currentCalculation.length());
-                }
-                e = new Expression(currentCalculation + ")");
-                result = String.valueOf(e.calculate());
-            }
+            e = new Expression(currentCalculation + ")");
+            result = String.valueOf(e.calculate());
+
         }
         if(result.endsWith("E-16") || result.endsWith("E-15") || result.endsWith("E-14")){
             result = "0";
