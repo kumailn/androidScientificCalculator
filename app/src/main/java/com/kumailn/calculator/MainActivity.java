@@ -2,15 +2,12 @@ package com.kumailn.calculator;
 
 import android.animation.Animator;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,9 +16,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.text.InputType;
 import android.text.Layout;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
@@ -32,21 +27,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SoundEffectConstants;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -1622,12 +1611,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e("backgroundC", currentCalculation);
         Log.e("displayC", displayCalculation);
 
-/*
-        if(currentCalculation.contains("pi")){
-            String xx = currentCalculation;
-            xx = xx.substring(0, 4) + "." + xx.substring(4, xx.length());
-        }
-*/
         if(currentCalculation.contains("+.")) {
             Log.e("DECIMAL","DETECTED");
             for(int i = 0; i < currentCalculation.length(); i++){
