@@ -48,7 +48,7 @@ import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 
 //Kumail Naqvi June 5th 2017
-//test 1
+//Git test 1
 public class MainActivity extends AppCompatActivity {
     public static String currentCalculation;
     public static String previousCalculation;
