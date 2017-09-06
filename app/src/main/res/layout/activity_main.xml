@@ -29,6 +29,8 @@
         android:layout_height="42dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/ic_info_black_24dp"
+        android:backgroundTint="@color/colorAccent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="363dp" />

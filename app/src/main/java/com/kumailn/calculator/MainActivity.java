@@ -1303,6 +1303,10 @@ public class MainActivity extends AppCompatActivity {
                         firstExponent = false;
                     }
                     else {
+                        if (currentCalculation.endsWith("*") || currentCalculation.endsWith("-") || currentCalculation.endsWith("+") || currentCalculation.endsWith("/")){
+                            currentCalculation += "0";
+                            displayCalculation += "0";
+                        }
                         currentCalculation += ".";
                         displayCalculation += ".";
                         calculationView.setText(displayCalculation);
@@ -1310,6 +1314,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else{
+                    if (currentCalculation.endsWith("*") || currentCalculation.endsWith("-") || currentCalculation.endsWith("+") || currentCalculation.endsWith("/")){
+                        currentCalculation += "0";
+                        displayCalculation += "0";
+                    }
                     currentCalculation += ".";
                     displayCalculation += ".";
                     calculationView.setText(displayCalculation);
