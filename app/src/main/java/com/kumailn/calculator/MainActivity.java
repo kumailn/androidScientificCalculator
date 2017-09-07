@@ -66,8 +66,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
+        //Initialize widgets
         final Button zeroB = (Button)findViewById(R.id.zeroButton);
         final Button oneB = (Button)findViewById(R.id.oneButton);
         final Button twoB = (Button)findViewById(R.id.twoButton);
