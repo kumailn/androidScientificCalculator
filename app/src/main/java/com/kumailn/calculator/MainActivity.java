@@ -1,4 +1,4 @@
-package com.kumailn.calculator;
+    package com.kumailn.calculator;
 
 import android.animation.Animator;
 import android.app.AlertDialog;
@@ -1304,7 +1304,7 @@ public class MainActivity extends AppCompatActivity {
                         firstExponent = false;
                     }
                     else {
-                        if (currentCalculation.endsWith("*") || currentCalculation.endsWith("-") || currentCalculation.endsWith("+") || currentCalculation.endsWith("/")){
+                        if (currentCalculation.endsWith("*") || currentCalculation.endsWith("-") || currentCalculation.endsWith("+") || currentCalculation.endsWith("/") || (currentCalculation.trim().length() == 0)){
                             currentCalculation += "0";
                             displayCalculation += "0";
                         }
@@ -1315,7 +1315,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else{
-                    if (currentCalculation.endsWith("*") || currentCalculation.endsWith("-") || currentCalculation.endsWith("+") || currentCalculation.endsWith("/")){
+                    if (currentCalculation.endsWith("*") || currentCalculation.endsWith("-") || currentCalculation.endsWith("+") || currentCalculation.endsWith("/") || (currentCalculation.trim().length() == 0)){
                         currentCalculation += "0";
                         displayCalculation += "0";
                     }
