@@ -640,6 +640,7 @@ public class MainActivity extends AppCompatActivity {
         oneB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                onVarClicks();
                 currentCalculation += "e";
                 displayCalculation += "e";
                 calculationView.setText(displayCalculation);
@@ -667,6 +668,7 @@ public class MainActivity extends AppCompatActivity {
         twoB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                onVarClicks();
                 currentCalculation += "[phi]";
                 displayCalculation += "φ";
                 calculationView.setText(displayCalculation);
@@ -679,7 +681,6 @@ public class MainActivity extends AppCompatActivity {
         threeB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 currentCalculation += "3";
                 displayCalculation += "3";
                 calculationView.setText(displayCalculation);
@@ -834,6 +835,7 @@ public class MainActivity extends AppCompatActivity {
         logB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onVarClicks();
                 currentCalculation += "log(10,";
                 displayCalculation += "log(";
                 calculationView.setText(displayCalculation);
@@ -845,6 +847,7 @@ public class MainActivity extends AppCompatActivity {
         lnB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onVarClicks();
                 currentCalculation += "ln(";
                 displayCalculation += "ln(";
                 calculationView.setText(displayCalculation);
@@ -888,6 +891,7 @@ public class MainActivity extends AppCompatActivity {
         sinB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onVarClicks();
                 if(angle == true){
                     currentCalculation += "sin([deg]*";
                     displayCalculation += "sin(";
@@ -908,6 +912,7 @@ public class MainActivity extends AppCompatActivity {
         sinB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                onVarClicks();
                 if(angle == true){
                     currentCalculation += "asin([deg]*";
                     displayCalculation += "arcsin(";
@@ -931,6 +936,7 @@ public class MainActivity extends AppCompatActivity {
         cosB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onVarClicks();
                 if(angle == true){
                     currentCalculation += "cos([deg]*";
                     displayCalculation += "cos(";
@@ -949,6 +955,7 @@ public class MainActivity extends AppCompatActivity {
         cosB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                onVarClicks();
                 if(angle == true){
                     currentCalculation += "acos([deg]*";
                     displayCalculation += "arccos(";
@@ -972,6 +979,7 @@ public class MainActivity extends AppCompatActivity {
         tanB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onVarClicks();
                 if(angle == true){
                     currentCalculation += "tan([deg]*";
                     displayCalculation += "tan(";
@@ -991,6 +999,7 @@ public class MainActivity extends AppCompatActivity {
         tanB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                onVarClicks();
                 if(angle == true){
                     currentCalculation += "atan([deg]*";
                     displayCalculation += "arctan(";
@@ -1333,6 +1342,7 @@ public class MainActivity extends AppCompatActivity {
         decimalB.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                onVarClicks();
                 if(exponentOn == true){
                     if (firstExponent == true){
                         currentCalculation += "^(pi";
@@ -1363,6 +1373,7 @@ public class MainActivity extends AppCompatActivity {
         ansB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                onVarClicks();
                 if(previousAns != null){
                     currentCalculation += previousAns;
                     displayCalculation += "Ans";
@@ -1577,6 +1588,15 @@ public class MainActivity extends AppCompatActivity {
         HorizontalScrollView mSV = (HorizontalScrollView)findViewById(R.id.myScrollView);
         Layout layout = instantC.getLayout();
         mSV.smoothScrollTo(mSV.getRight(), 0);
+
+    }
+
+    public void onVarClicks(){
+        if (!(currentCalculation.endsWith("*") || currentCalculation.endsWith("-") || currentCalculation.endsWith("+") || currentCalculation.endsWith("/") || currentCalculation.endsWith("(") || currentCalculation.endsWith("#") || (currentCalculation.trim().length() == 0))){
+            currentCalculation += "*";
+            displayCalculation += "×";
+        }
+
 
     }
 
