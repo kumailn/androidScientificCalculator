@@ -1478,6 +1478,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     instantCalcView.setText(" " + result);
+                    instantCalcView.setTextColor(getResources().getColor(R.color.clearView3));
                     calculationView.setText(" " + "Ans");
                     displayCalculation = (" " + "Ans");
                     currentCalculation = result;
@@ -1585,9 +1586,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAllClicks(){
         TextView instantC = (TextView)findViewById(R.id.instantCalcluationView);
+        TextView calculationView = (TextView)findViewById(R.id.calcView);
         HorizontalScrollView mSV = (HorizontalScrollView)findViewById(R.id.myScrollView);
         Layout layout = instantC.getLayout();
         mSV.smoothScrollTo(mSV.getRight(), 0);
+        calculationView.setTextColor(getResources().getColor(R.color.basic_text));
 
     }
 
@@ -1614,7 +1617,7 @@ public class MainActivity extends AppCompatActivity {
         TextView calculationView = (TextView)findViewById(R.id.calcView);
         TextView instantCalcView = (TextView)findViewById(R.id.instantCalcluationView);
         TextView pView = (TextView)findViewById(R.id.primeView);
-
+        instantCalcView.setTextColor(getResources().getColor(R.color.basic_text));
         if(currentCalculation.contains(",") && (!(currentCalculation.contains("lcm")) && !(currentCalculation.contains("gcd")))){
             currentCalculation = currentCalculation.replace(",", ".");
         }
