@@ -1618,7 +1618,9 @@ public class MainActivity extends AppCompatActivity {
         TextView instantCalcView = (TextView)findViewById(R.id.instantCalcluationView);
         TextView pView = (TextView)findViewById(R.id.primeView);
         instantCalcView.setTextColor(getResources().getColor(R.color.basic_text));
-        if(currentCalculation.contains(",") && (!(currentCalculation.contains("lcm")) && !(currentCalculation.contains("gcd")))){
+
+        //Catch for international users - turn commas into decimals
+        if(currentCalculation.contains(",") && (!(currentCalculation.contains("lcm")) && !(currentCalculation.contains("gcd"))) && (!(currentCalculation.contains("C")))){
             currentCalculation = currentCalculation.replace(",", ".");
         }
 
