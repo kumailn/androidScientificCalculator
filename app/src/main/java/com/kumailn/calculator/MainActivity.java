@@ -544,7 +544,7 @@ public class MainActivity extends AppCompatActivity {
                             builderSingle.show();
                         }
                         else if(item.getTitle().equals("Settings")){
-
+                            Toast.makeText(getApplicationContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
                         }
                         else{
                             AlertDialog.Builder builder;
