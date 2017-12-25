@@ -6,12 +6,15 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +42,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.stetho.Stetho;
+
 import org.mariuszgromada.math.mxparser.Expression;
 import org.w3c.dom.Text;
 
@@ -48,7 +53,6 @@ import io.codetail.animation.ViewAnimationUtils;
 import io.codetail.widget.RevealFrameLayout;
 
 //Kumail Naqvi June 5th 2017
-//Git test 1
 public class MainActivity extends AppCompatActivity {
     public static String currentCalculation;
     public static String previousCalculation;
@@ -62,12 +66,18 @@ public class MainActivity extends AppCompatActivity {
     //False == rad, true == deg
     public static Boolean angle;
     public static final String defaultMethod = "rad";
+    public static int LOW_IMPORTANCE_KEY_VIBRATE = 50;
+    public static int MED_IMPORTANCE_KEY_VIBRATE = 80;
+    public static int HIGH_IMPORTANCE_KEY_VIBRATE = 120;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Stetho.initializeWithDefaults(this);
+        getSupportActionBar().hide();
         //Initialize widgets
         final Button zeroB = (Button)findViewById(R.id.zeroButton);
         final Button oneB = (Button)findViewById(R.id.oneButton);
@@ -111,9 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
         //instantCalcView
 
-
-
-
         currentCalculation = " ";
         displayCalculation = " ";
         pVisible = false;
@@ -128,6 +135,34 @@ public class MainActivity extends AppCompatActivity {
         }
         catch(Exception ff){
 
+        }
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String vibrationChoice = sharedPreferences.getString("key_vibration_intensity_setting", "0");
+        Boolean vibrationSwitch = sharedPreferences.getBoolean("key_vibration_switch", true);
+        Log.e("vibrate", vibrationChoice);
+
+        if(vibrationSwitch) {
+            switch (Integer.valueOf(vibrationChoice)) {
+                case 0:
+                    LOW_IMPORTANCE_KEY_VIBRATE = 5;
+                    MED_IMPORTANCE_KEY_VIBRATE = 10;
+                    HIGH_IMPORTANCE_KEY_VIBRATE = 15;
+                case 1:
+                    LOW_IMPORTANCE_KEY_VIBRATE = 30;
+                    MED_IMPORTANCE_KEY_VIBRATE = 40;
+                    HIGH_IMPORTANCE_KEY_VIBRATE = 50;
+                case 2:
+                    LOW_IMPORTANCE_KEY_VIBRATE = 50;
+                    MED_IMPORTANCE_KEY_VIBRATE = 60;
+                    HIGH_IMPORTANCE_KEY_VIBRATE = 70;
+
+            }
+        }
+        else{
+            LOW_IMPORTANCE_KEY_VIBRATE = 0;
+            MED_IMPORTANCE_KEY_VIBRATE = 0;
+            HIGH_IMPORTANCE_KEY_VIBRATE = 0;
         }
 
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -334,7 +369,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
                 onAllClicks();
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
             }
         });
 
@@ -545,6 +580,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else if(item.getTitle().equals("Settings")){
                             Toast.makeText(getApplicationContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                         }
                         else{
                             AlertDialog.Builder builder;
@@ -589,6 +625,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        fiveB.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+
 
 
         zeroB.setOnClickListener(new View.OnClickListener() {
@@ -600,7 +643,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
 
@@ -630,7 +673,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
 
@@ -659,7 +702,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -686,7 +729,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -715,7 +758,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -730,7 +773,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -745,7 +788,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
 
@@ -761,7 +804,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -786,7 +829,7 @@ public class MainActivity extends AppCompatActivity {
                 calculationView.setText(displayCalculation);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -826,7 +869,7 @@ public class MainActivity extends AppCompatActivity {
                     calculationView.setText(displayCalculation);
                 }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -1049,7 +1092,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "×";
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(80);
+                vv.vibrate(MED_IMPORTANCE_KEY_VIBRATE);
                 onAllClicks();
                 equalsMethod();
             }
@@ -1065,7 +1108,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "+";
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(80);
+                vv.vibrate(MED_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -1105,7 +1148,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "÷";
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(80);
+                vv.vibrate(MED_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -1133,7 +1176,7 @@ public class MainActivity extends AppCompatActivity {
                 displayCalculation += "-";
                 calculationView.setText(displayCalculation);
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(80);
+                vv.vibrate(MED_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -1155,7 +1198,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(MED_IMPORTANCE_KEY_VIBRATE);
 
                 if(displayCalculation.length() < 1){
                     int a = 1;
@@ -1226,7 +1269,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(120);
+                vv.vibrate(HIGH_IMPORTANCE_KEY_VIBRATE);
 
                 Animation fadeOut = new AlphaAnimation(1, 0);
                 fadeOut.setInterpolator(new AccelerateInterpolator()); //and this
@@ -1333,7 +1376,7 @@ public class MainActivity extends AppCompatActivity {
                     calculationView.setText(displayCalculation);
                 }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
             }
@@ -1363,7 +1406,7 @@ public class MainActivity extends AppCompatActivity {
                     calculationView.setText(displayCalculation);
                 }
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(50);
+                vv.vibrate(LOW_IMPORTANCE_KEY_VIBRATE);
                 equalsMethod();
                 onAllClicks();
                 return true;
@@ -1404,7 +1447,7 @@ public class MainActivity extends AppCompatActivity {
                 v.playSoundEffect(SoundEffectConstants.CLICK);
 
                 Vibrator vv = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vv.vibrate(110);
+                vv.vibrate(MED_IMPORTANCE_KEY_VIBRATE);
 
 
                 if(currentCalculation.equals("") || currentCalculation.equals(" ") || currentCalculation.equals("   ")){
@@ -1763,6 +1806,37 @@ public class MainActivity extends AppCompatActivity {
         return (myMethod);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String vibrationChoice = sharedPreferences.getString("key_vibration_intensity_setting", "0");
+        Boolean vibrationSwitch = sharedPreferences.getBoolean("key_vibration_switch", true);
+        Log.e("vibrate", vibrationChoice);
+
+        if(vibrationSwitch) {
+            switch (Integer.valueOf(vibrationChoice)) {
+                case 0:
+                    LOW_IMPORTANCE_KEY_VIBRATE = 5;
+                    MED_IMPORTANCE_KEY_VIBRATE = 10;
+                    HIGH_IMPORTANCE_KEY_VIBRATE = 15;
+                case 1:
+                    LOW_IMPORTANCE_KEY_VIBRATE = 40;
+                    MED_IMPORTANCE_KEY_VIBRATE = 50;
+                    HIGH_IMPORTANCE_KEY_VIBRATE = 60;
+                case 2:
+                    LOW_IMPORTANCE_KEY_VIBRATE = 70;
+                    MED_IMPORTANCE_KEY_VIBRATE = 80;
+                    HIGH_IMPORTANCE_KEY_VIBRATE = 90;
+
+            }
+        }
+        else{
+            LOW_IMPORTANCE_KEY_VIBRATE = 0;
+            MED_IMPORTANCE_KEY_VIBRATE = 0;
+            HIGH_IMPORTANCE_KEY_VIBRATE = 0;
+        }
+    }
 }
 
 /**

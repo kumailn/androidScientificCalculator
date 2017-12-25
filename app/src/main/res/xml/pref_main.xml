@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="General">
+<!--
+        Left this in for future reference
+        <EditTextPreference
+            android:defaultValue="@string/default_gallery_storage"
+            android:key="@string/key_gallery_name"
+            android:summary="@string/default_gallery_storage"
+            android:title="@string/title_gallery_storage" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/key_upload_over_wifi"
+            android:summary="@string/summary_upload_over_wifi"
+            android:title="@string/title_auto_upload" />-->
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="Choose Theme"
+            android:entries="@array/pref_upload_quality_entries"
+            android:entryValues="@array/pref_upload_quality_values"
+            android:key="@string/key_theme_setting"
+            android:summary="Change how NuCalculator looks and feels"
+            android:title="Theme" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_vibration_switch"
+            android:summary="Switch vibration on keypress on or off"
+            android:title="Vibration" />
+
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="Vibration intensity"
+            android:entries="@array/pref_vibration_entries"
+            android:entryValues="@array/pref_vibration_values"
+            android:key="@string/key_vibration_intensity_setting"
+            android:dependency="@string/key_vibration_switch"
+            android:summary="Change how NuCalculator looks and feels"
+            android:title="Vibration intensity" />
+
+<!--        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dependency="notifications_new_message"
+            android:key="@string/key_notifications_new_message_ringtone"
+            android:ringtoneType="notification"
+            android:summary="@string/summary_choose_ringtone"
+            android:title="Vibration " />-->
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_header_about">
+
+        <Preference
+            android:title="Version"
+            android:selectable="false"
+            android:summary="@string/summary_about"
+            android:key="key_version"
+            />
+
+<!--
+        <Preference
+            android:summary="@string/app_version"
+            android:title="@string/title_version" />
+-->
+
+        <Preference
+            android:key="@string/key_send_feedback"
+            android:summary="@string/summary_support"
+            android:title="@string/title_send_feedback" />
+
+<!--        <Preference android:title="@string/title_terms">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/url_terms" />
+        </Preference>-->
+    </PreferenceCategory>
+</PreferenceScreen>
