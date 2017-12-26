@@ -1,6 +1,7 @@
     package com.kumailn.calculator;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     public static int MED_IMPORTANCE_KEY_VIBRATE = 80;
     public static int HIGH_IMPORTANCE_KEY_VIBRATE = 120;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,8 +139,78 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String vibrationChoice = sharedPreferences.getString("key_vibration_intensity_setting", "0");
+        String themeChoice = sharedPreferences.getString("key_theme_setting", "0");
         Boolean vibrationSwitch = sharedPreferences.getBoolean("key_vibration_switch", true);
         Log.e("vibrate", vibrationChoice);
+
+        //setTheme(Integer.valueOf(themeChoice));
+
+        int numButtonColor = Color.WHITE;
+        int cardBackgroundColor = getResources().getColor(R.color.lightRed);
+        int backgroundColor = getResources().getColor(R.color.naturalBlack);
+        int functionButtonColor = getResources().getColor(R.color.grayC);
+        int equalsButtonColor = R.color.equalsButtonOriginal;
+
+        switch (Integer.valueOf(themeChoice)){
+            case 1:
+                numButtonColor = Color.BLACK;
+                cardBackgroundColor = getResources().getColor(R.color.smallTextColor);
+                backgroundColor = Color.WHITE;
+                functionButtonColor = getResources().getColor(R.color.grayC);
+                equalsButtonColor = R.color.smallTextColor;
+                break;
+            case 2:
+                numButtonColor = getResources().getColor(R.color.fuschia);
+                cardBackgroundColor = getResources().getColor(R.color.fuschiaPink);
+                backgroundColor = getResources().getColor(R.color.backgroundFuschia);
+                functionButtonColor = getResources().getColor(R.color.purple);
+                equalsButtonColor = R.color.equalsButtonOriginal;
+                break;
+            case 3:
+                numButtonColor = getResources().getColor(R.color.oceanBlue);
+                cardBackgroundColor = getResources().getColor(R.color.lightbluee2);
+                backgroundColor = getResources().getColor(R.color.lightbluee);
+                functionButtonColor = getResources().getColor(R.color.oxfordBlue);
+                equalsButtonColor = R.color.smallTextColor;
+                break;
+            case 4:
+                numButtonColor = getResources().getColor(R.color.clearView3);
+                cardBackgroundColor = getResources().getColor(R.color.clearView2);
+                backgroundColor = getResources().getColor(R.color.clearView2);
+                functionButtonColor = getResources().getColor(R.color.oxfordBlue);
+                equalsButtonColor = R.color.equalsButtonOriginal;
+        }
+
+        //Stealth Black
+        mvv.setBackgroundColor(cardBackgroundColor);
+        myLayout.setBackgroundColor(backgroundColor);
+        myLinear.setBackgroundColor(backgroundColor);
+        zeroB.setTextColor(numButtonColor);
+        oneB.setTextColor(numButtonColor);
+        twoB.setTextColor(numButtonColor);
+        threeB.setTextColor(numButtonColor);
+        fourB.setTextColor(numButtonColor);
+        fiveB.setTextColor(numButtonColor);
+        sixB.setTextColor(numButtonColor);
+        sevenB.setTextColor(numButtonColor);
+        eightB.setTextColor(numButtonColor);
+        nineB.setTextColor(numButtonColor);
+        decimalB.setTextColor(numButtonColor);
+        ansB.setTextColor(numButtonColor);
+
+        logB.setTextColor(functionButtonColor);
+        sinB.setTextColor(functionButtonColor);
+        cosB.setTextColor(functionButtonColor);
+        tanB.setTextColor(functionButtonColor);
+        binButton.setTextColor(functionButtonColor);
+        exponentB.setTextColor(functionButtonColor);
+        bracketB.setTextColor(functionButtonColor);
+        sqrtB.setTextColor(functionButtonColor);
+        lnB.setTextColor(functionButtonColor);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, equalsButtonColor));
+        }
 
         if(vibrationSwitch) {
             switch (Integer.valueOf(vibrationChoice)) {
@@ -187,9 +257,10 @@ public class MainActivity extends AppCompatActivity {
             angle = true;
         }
 
+
         //Load theme - Not a seperate function because the compilation crashes?
         String themeNumber = loadTheme();
-        if(themeNumber.equals("0")){
+        if(themeNumber.equals("0f")){
             //Stealth Black
             mvv.setBackgroundColor(getResources().getColor(R.color.lightRed));
             myLayout.setBackgroundColor(getResources().getColor(R.color.naturalBlack));
@@ -222,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-        else if(themeNumber.equals("1")){
+        else if(themeNumber.equals("f1")){
             //Minimal White
             mvv.setBackgroundColor(getResources().getColor(R.color.smallTextColor));
             myLayout.setBackgroundColor(Color.WHITE);
@@ -253,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        else if(themeNumber.equals("2")){
+        else if(themeNumber.equals("2f")){
             //Fuschia
             mvv.setBackgroundColor(getResources().getColor(R.color.fuschiaPink));
             myLayout.setBackgroundColor(getResources().getColor(R.color.backgroundFuschia));
@@ -284,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        else if(themeNumber.equals("3")){
+        else if(themeNumber.equals("3f")){
             //Ocean Blue
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                 mvv.setBackgroundColor(getResources().getColor(R.color.lightbluee2));
@@ -320,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        else if(themeNumber.equals("4")){
+        else if(themeNumber.equals("4f")){
             //green
             mvv.setBackgroundColor(getResources().getColor(R.color.clearView2));
             myLayout.setBackgroundColor(getResources().getColor(R.color.clearView2));
@@ -381,7 +452,8 @@ public class MainActivity extends AppCompatActivity {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getTitle().equals("Customize")){
+                        //DISABLED
+                        if(item.getTitle().equals("Customize1")){
                             //Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();
                             AlertDialog.Builder builderSingle = new AlertDialog.Builder(MainActivity.this);
                             builderSingle.setTitle("Set a theme:");
@@ -579,7 +651,7 @@ public class MainActivity extends AppCompatActivity {
                             builderSingle.show();
                         }
                         else if(item.getTitle().equals("Settings")){
-                            Toast.makeText(getApplicationContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Coming Soon...", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
                         }
                         else{
@@ -1591,6 +1663,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         angleB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1626,6 +1699,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
     public void onAllClicks(){
         TextView instantC = (TextView)findViewById(R.id.instantCalcluationView);
@@ -1809,6 +1884,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        //Initialize widgets
+        final Button zeroB = (Button)findViewById(R.id.zeroButton);
+        final Button oneB = (Button)findViewById(R.id.oneButton);
+        final Button twoB = (Button)findViewById(R.id.twoButton);
+        final Button threeB = (Button)findViewById(R.id.threeButton);
+        final Button fourB = (Button)findViewById(R.id.fourButton);
+        final Button fiveB = (Button)findViewById(R.id.fiveButton);
+        final Button sixB = (Button)findViewById(R.id.sixButton);
+        final Button sevenB = (Button)findViewById(R.id.sevenButton);
+        final Button eightB = (Button)findViewById(R.id.eightButton);
+        final Button nineB = (Button)findViewById(R.id.nineButton);
+        final Button decimalB = (Button)findViewById(R.id.decimalButton);
+        final Button ansB = (Button)findViewById(R.id.ansButton);
+        final Button multB = (Button)findViewById(R.id.multiplyButton);
+        final Button minusB = (Button)findViewById(R.id.minusButton);
+        final Button divB = (Button)findViewById(R.id.divideButton);
+        final Button equalsB = (Button)findViewById(R.id.equalsButton);
+        final Button plusB = (Button)findViewById(R.id.plusButton);
+        final Button sinB = (Button)findViewById(R.id.sinButton);
+        final Button tanB = (Button)findViewById(R.id.tanButton);
+        final Button cosB = (Button)findViewById(R.id.cosButton);
+        Button delB = (Button)findViewById(R.id.deleteButton);
+        Button clrB = (Button)findViewById(R.id.clearButton);
+        final Button bracketB = (Button) findViewById(R.id.bracketButton);
+        final Button logB = (Button)findViewById(R.id.logButton);
+        final Button lnB = (Button)findViewById(R.id.lnButton);
+        final Button binButton = (Button)findViewById(R.id.bbb);
+        final Button sqrtB = (Button)findViewById(R.id.sqrtButton);
+        final Button popupB = (Button)findViewById(R.id.popupButton);
+        final TextView calculationView = (TextView)findViewById(R.id.instantCalcluationView);
+        final TextView pView = (TextView)findViewById(R.id.primeView);
+        final Button angleB = (Button)findViewById(R.id.angleButton);
+        final Button exponentB = (Button) findViewById(R.id.exponentButton);
+        final TextView instantCalcView = (TextView)findViewById(R.id.calcView);
+        final LinearLayout myLinear = (LinearLayout)findViewById(R.id.linearLayout);
+        final ConstraintLayout myLayout = (ConstraintLayout)findViewById(R.id.myBackLayout);
+        final RevealFrameLayout myReveal = (RevealFrameLayout)findViewById(R.id.revealFrameLayout);
+        final View mvv = findViewById(R.id.awesome_card);
+
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String vibrationChoice = sharedPreferences.getString("key_vibration_intensity_setting", "0");
         Boolean vibrationSwitch = sharedPreferences.getBoolean("key_vibration_switch", true);
@@ -1836,7 +1952,187 @@ public class MainActivity extends AppCompatActivity {
             MED_IMPORTANCE_KEY_VIBRATE = 0;
             HIGH_IMPORTANCE_KEY_VIBRATE = 0;
         }
+
+        String themeChoice = sharedPreferences.getString("key_theme_setting", "0");
+        //setTheme(Integer.valueOf(themeChoice));
+
+        int numButtonColor = Color.WHITE;
+        int cardBackgroundColor = getResources().getColor(R.color.lightRed);
+        int backgroundColor = getResources().getColor(R.color.naturalBlack);
+        int functionButtonColor = getResources().getColor(R.color.grayC);
+        int equalsButtonColor = R.color.equalsButtonOriginal;
+
+        switch (Integer.valueOf(themeChoice)){
+            case 1:
+                numButtonColor = Color.BLACK;
+                cardBackgroundColor = getResources().getColor(R.color.smallTextColor);
+                backgroundColor = Color.WHITE;
+                functionButtonColor = getResources().getColor(R.color.grayC);
+                equalsButtonColor = R.color.smallTextColor;
+                break;
+            case 2:
+                numButtonColor = getResources().getColor(R.color.fuschia);
+                cardBackgroundColor = getResources().getColor(R.color.fuschiaPink);
+                backgroundColor = getResources().getColor(R.color.backgroundFuschia);
+                functionButtonColor = getResources().getColor(R.color.purple);
+                equalsButtonColor = R.color.equalsButtonOriginal;
+                break;
+            case 3:
+                numButtonColor = getResources().getColor(R.color.oceanBlue);
+                cardBackgroundColor = getResources().getColor(R.color.lightbluee2);
+                backgroundColor = getResources().getColor(R.color.lightbluee);
+                functionButtonColor = getResources().getColor(R.color.oxfordBlue);
+                equalsButtonColor = R.color.smallTextColor;
+                break;
+            case 4:
+                numButtonColor = getResources().getColor(R.color.clearView3);
+                cardBackgroundColor = getResources().getColor(R.color.clearView2);
+                backgroundColor = getResources().getColor(R.color.clearView2);
+                functionButtonColor = getResources().getColor(R.color.oxfordBlue);
+                equalsButtonColor = R.color.equalsButtonOriginal;
+        }
+
+        //Stealth Black
+        mvv.setBackgroundColor(cardBackgroundColor);
+        myLayout.setBackgroundColor(backgroundColor);
+        myLinear.setBackgroundColor(backgroundColor);
+        zeroB.setTextColor(numButtonColor);
+        oneB.setTextColor(numButtonColor);
+        twoB.setTextColor(numButtonColor);
+        threeB.setTextColor(numButtonColor);
+        fourB.setTextColor(numButtonColor);
+        fiveB.setTextColor(numButtonColor);
+        sixB.setTextColor(numButtonColor);
+        sevenB.setTextColor(numButtonColor);
+        eightB.setTextColor(numButtonColor);
+        nineB.setTextColor(numButtonColor);
+        decimalB.setTextColor(numButtonColor);
+        ansB.setTextColor(numButtonColor);
+
+        logB.setTextColor(functionButtonColor);
+        sinB.setTextColor(functionButtonColor);
+        cosB.setTextColor(functionButtonColor);
+        tanB.setTextColor(functionButtonColor);
+        binButton.setTextColor(functionButtonColor);
+        exponentB.setTextColor(functionButtonColor);
+        bracketB.setTextColor(functionButtonColor);
+        sqrtB.setTextColor(functionButtonColor);
+        lnB.setTextColor(functionButtonColor);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, equalsButtonColor));
+        }
+
     }
+
+/*    public void setTheme(int number){
+        Button zeroB = (Button)findViewById(R.id.zeroButton);
+        Button oneB = (Button)findViewById(R.id.oneButton);
+        Button twoB = (Button)findViewById(R.id.twoButton);
+        Button threeB = (Button)findViewById(R.id.threeButton);
+        Button fourB = (Button)findViewById(R.id.fourButton);
+        Button fiveB = (Button)findViewById(R.id.fiveButton);
+        Button sixB = (Button)findViewById(R.id.sixButton);
+        Button sevenB = (Button)findViewById(R.id.sevenButton);
+        Button eightB = (Button)findViewById(R.id.eightButton);
+        Button nineB = (Button)findViewById(R.id.nineButton);
+        Button decimalB = (Button)findViewById(R.id.decimalButton);
+        Button ansB = (Button)findViewById(R.id.ansButton);
+        Button multB = (Button)findViewById(R.id.multiplyButton);
+        Button minusB = (Button)findViewById(R.id.minusButton);
+        Button divB = (Button)findViewById(R.id.divideButton);
+        Button equalsB = (Button)findViewById(R.id.equalsButton);
+        Button plusB = (Button)findViewById(R.id.plusButton);
+        Button sinB = (Button)findViewById(R.id.sinButton);
+        Button tanB = (Button)findViewById(R.id.tanButton);
+        Button cosB = (Button)findViewById(R.id.cosButton);
+        Button delB = (Button)findViewById(R.id.deleteButton);
+        Button clrB = (Button)findViewById(R.id.clearButton);
+        Button bracketB = (Button) findViewById(R.id.bracketButton);
+        Button logB = (Button)findViewById(R.id.logButton);
+        Button lnB = (Button)findViewById(R.id.lnButton);
+        Button binButton = (Button)findViewById(R.id.bbb);
+        Button sqrtB = (Button)findViewById(R.id.sqrtButton);
+        Button popupB = (Button)findViewById(R.id.popupButton);
+        TextView calculationView = (TextView)findViewById(R.id.instantCalcluationView);
+        TextView pView = (TextView)findViewById(R.id.primeView);
+        Button angleB = (Button)findViewById(R.id.angleButton);
+        Button exponentB = (Button) findViewById(R.id.exponentButton);
+        TextView instantCalcView = (TextView)findViewById(R.id.calcView);
+        LinearLayout myLinear = (LinearLayout)findViewById(R.id.linearLayout);
+        ConstraintLayout myLayout = (ConstraintLayout)findViewById(R.id.myBackLayout);
+        RevealFrameLayout myReveal = (RevealFrameLayout)findViewById(R.id.revealFrameLayout);
+        View mvv = findViewById(R.id.awesome_card);
+
+        int numButtonColor = Color.WHITE;
+        int cardBackgroundColor = getResources().getColor(R.color.lightRed);
+        int backgroundColor = getResources().getColor(R.color.naturalBlack);
+        int functionButtonColor = getResources().getColor(R.color.grayC);
+        int equalsButtonColor = R.color.equalsButtonOriginal;
+
+        switch (number){
+            case 1:
+                numButtonColor = Color.BLACK;
+                cardBackgroundColor = getResources().getColor(R.color.smallTextColor);
+                backgroundColor = Color.WHITE;
+                functionButtonColor = getResources().getColor(R.color.grayC);
+                equalsButtonColor = R.color.smallTextColor;
+                break;
+            case 2:
+                numButtonColor = getResources().getColor(R.color.fuschia);
+                cardBackgroundColor = getResources().getColor(R.color.fuschiaPink);
+                backgroundColor = getResources().getColor(R.color.backgroundFuschia);
+                functionButtonColor = getResources().getColor(R.color.purple);
+                equalsButtonColor = R.color.equalsButtonOriginal;
+                break;
+            case 3:
+                numButtonColor = getResources().getColor(R.color.oceanBlue);
+                cardBackgroundColor = getResources().getColor(R.color.lightbluee2);
+                backgroundColor = getResources().getColor(R.color.lightbluee);
+                functionButtonColor = getResources().getColor(R.color.oxfordBlue);
+                equalsButtonColor = R.color.smallTextColor;
+                break;
+            case 4:
+                numButtonColor = getResources().getColor(R.color.clearView3);
+                cardBackgroundColor = getResources().getColor(R.color.clearView2);
+                backgroundColor = getResources().getColor(R.color.clearView2);
+                functionButtonColor = getResources().getColor(R.color.oxfordBlue);
+                equalsButtonColor = R.color.equalsButtonOriginal;
+        }
+
+        //Stealth Black
+        mvv.setBackgroundColor(cardBackgroundColor);
+        myLayout.setBackgroundColor(backgroundColor);
+        myLinear.setBackgroundColor(backgroundColor);
+        zeroB.setTextColor(numButtonColor);
+        oneB.setTextColor(numButtonColor);
+        twoB.setTextColor(numButtonColor);
+        threeB.setTextColor(numButtonColor);
+        fourB.setTextColor(numButtonColor);
+        fiveB.setTextColor(numButtonColor);
+        sixB.setTextColor(numButtonColor);
+        sevenB.setTextColor(numButtonColor);
+        eightB.setTextColor(numButtonColor);
+        nineB.setTextColor(numButtonColor);
+        decimalB.setTextColor(numButtonColor);
+        ansB.setTextColor(numButtonColor);
+
+        logB.setTextColor(functionButtonColor);
+        sinB.setTextColor(functionButtonColor);
+        cosB.setTextColor(functionButtonColor);
+        tanB.setTextColor(functionButtonColor);
+        binButton.setTextColor(functionButtonColor);
+        exponentB.setTextColor(functionButtonColor);
+        bracketB.setTextColor(functionButtonColor);
+        sqrtB.setTextColor(functionButtonColor);
+        lnB.setTextColor(functionButtonColor);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            equalsB.setBackgroundTintList(ContextCompat.getColorStateList(MainActivity.this, equalsButtonColor));
+        }
+    }
+
+    */
 }
 
 /**
