@@ -76,8 +76,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //initialize stetho
         Stetho.initializeWithDefaults(this);
+
+        //Hide the action bar
         getSupportActionBar().hide();
+
         //Initialize widgets
         final Button zeroB = (Button)findViewById(R.id.zeroButton);
         final Button oneB = (Button)findViewById(R.id.oneButton);
@@ -120,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         final String versionName = BuildConfig.VERSION_NAME;
 
         //instantCalcView
-
         currentCalculation = " ";
         displayCalculation = " ";
         pVisible = false;
@@ -151,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
         int functionButtonColor = getResources().getColor(R.color.grayC);
         int equalsButtonColor = R.color.equalsButtonOriginal;
 
+        //Change button colors depending on theme
         switch (Integer.valueOf(themeChoice)){
             case 1:
                 numButtonColor = Color.BLACK;
@@ -181,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 equalsButtonColor = R.color.equalsButtonOriginal;
         }
 
-        //Stealth Black
+        //Set theme to the selected value
         mvv.setBackgroundColor(cardBackgroundColor);
         myLayout.setBackgroundColor(backgroundColor);
         myLinear.setBackgroundColor(backgroundColor);
@@ -244,9 +248,6 @@ public class MainActivity extends AppCompatActivity {
 /*        Log.e("A", String.valueOf(myToolbar.getDrawingCacheBackgroundColor()));
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);*/
 
-
-
-
         if(loadAngle().equals("rad")){
             angleB.setText("RAD");
             angle = false;
@@ -256,7 +257,6 @@ public class MainActivity extends AppCompatActivity {
             //angleB.setTextColor(getResources().getColor(R.color.degree));
             angle = true;
         }
-
 
         //Load theme - Not a seperate function because the compilation crashes?
         String themeNumber = loadTheme();
