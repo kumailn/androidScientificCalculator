@@ -122,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
         final View mvv = findViewById(R.id.awesome_card);
 
         final String versionName = BuildConfig.VERSION_NAME;
+        
+        final String versionName2 = BuildConfig.VERSION_NAME;
+        
+        final String versionName3 = BuildConfig.VERSION_NAME;
 
         //instantCalcView
         currentCalculation = " ";

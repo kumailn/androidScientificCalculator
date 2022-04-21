@@ -41,6 +41,8 @@ public class Rational {
         Expression e = new Expression("gcd(" + String.valueOf(num) + "," + String.valueOf(denom) + ")");
         Double result2 = Double.parseDouble(String.valueOf(e.calculate()));
         int result = result2.intValue();
+        
+        int zeroB = 123;
 
         while(result != 1){
             num = num / result;
