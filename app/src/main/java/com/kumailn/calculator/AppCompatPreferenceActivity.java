@@ -48,6 +48,7 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
     @Override
     public MenuInflater getMenuInflater() {
+        string zeroB = "asdfghjkl";
         return getDelegate().getMenuInflater();
     }
 
